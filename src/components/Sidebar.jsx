@@ -9,7 +9,7 @@ import { CiLogout } from "react-icons/ci";
 
 function Sidebar({ open, setOpen }) {
     return (
-        <aside className={`fixed md:static top-0 md:top-15 left-0 w-64 z-40 h-screen md:h-[100vh-60px] transition-transform duration-300 ${open ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}>
+        <aside className={`fixed md:static top-0 md:top-15 left-0 w-64 z-40 h-dvh md:h-[100vh-60px] transition-transform duration-300 ${open ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}>
             <section className="overflow-y-auto py-2 px-3 h-full flex flex-col bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700">
                 <div className="md:hidden flex items-center justify-between p-2 mb-4">
                     <h2 className="text-xl font-bold text-gray-900 dark:text-white">Willem April</h2>
