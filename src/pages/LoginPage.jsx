@@ -8,7 +8,7 @@ function LoginPage() {
             return axios.post(`${import.meta.env.VITE_API_URL}/users/login`, user, {withCredentials: true})
         },
         onSuccess: (res) => {
-            localStorage.setItem("user", res.data.user);
+            localStorage.setItem("user", JSON.stringify(res.data.user));
         }
     })
   
