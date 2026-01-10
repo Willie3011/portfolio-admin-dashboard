@@ -9,26 +9,29 @@ import Homepage from './pages/Homepage.jsx';
 import ProjectsPage from "./pages/ProjectsPage.jsx";
 import SkillsPage from "./pages/SkillsPage.jsx";
 import SocialPage from "./pages/SocialPage.jsx";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
-    element: <MainLayout />, 
+    element: <MainLayout />,
     children: [
       {
         path: "/",
-        element: <Homepage/>
+        element: <Homepage />
       },
       {
         path: "/projects",
-        element: <ProjectsPage/>
+        element: <ProjectsPage />
       },
       {
         path: "/skills",
-        element: <SkillsPage/>
+        element: <SkillsPage />
       },
       {
         path: "/socials",
-        element: <SocialPage/>
+        element: <SocialPage />
       }
     ]
   }
@@ -36,9 +39,11 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router}>
-      <App />
-      <ToastContainer position='bottom-right'/>
-    </RouterProvider>
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router}>
+        <App />
+        <ToastContainer position='bottom-right' />
+      </RouterProvider>
+    </QueryClientProvider>
   </StrictMode>,
 )
