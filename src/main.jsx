@@ -3,7 +3,6 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { ToastContainer } from 'react-toastify'
 import MainLayout from './layouts/MainLayout.jsx'
 import Homepage from './pages/Homepage.jsx';
 import ProjectsPage from "./pages/ProjectsPage.jsx";
@@ -12,6 +11,8 @@ import SocialPage from "./pages/SocialPage.jsx";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import LoginPage from './pages/LoginPage.jsx'
 import LoginLayout from './layouts/LoginLayout.jsx'
+import { ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 const queryClient = new QueryClient();
 
@@ -37,14 +38,14 @@ const router = createBrowserRouter([
         element: <SocialPage />
       }
     ]
-  }, 
+  },
   {
     path: "/",
     element: <LoginLayout />,
     children: [
       {
         path: "/",
-        element: <LoginPage/>
+        element: <LoginPage />
       }
     ]
   }
@@ -53,10 +54,9 @@ const router = createBrowserRouter([
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router}>
-        <App />
-        <ToastContainer position='bottom-right' />
-      </RouterProvider>
+      <RouterProvider router={router} />
+      <App />
+      <ToastContainer position='top-right' />
     </QueryClientProvider>
   </StrictMode>,
 )

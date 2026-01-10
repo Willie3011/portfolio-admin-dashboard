@@ -1,14 +1,16 @@
 import { useMutation } from "@tanstack/react-query"
 import axios from "axios"
+import { useNavigate } from "react-router-dom"
 
 function LoginPage() {
-  
+    const navigate = useNavigate();
     const mutation = useMutation({
         mutationFn: async (user) => {
             return axios.post(`${import.meta.env.VITE_API_URL}/users/login`, user, {withCredentials: true})
         },
         onSuccess: (res) => {
             localStorage.setItem("user", JSON.stringify(res.data.user));
+            navigate('/admin')
         }
     })
   
