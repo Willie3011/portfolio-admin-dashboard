@@ -19,25 +19,25 @@ function Sidebar({ open, setOpen }) {
                 </div>
                 <ul className="space-y-2 my-4">
                     <li>
-                        <Link to="/" className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                        <Link to="/admin" className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                             <IoGrid className="w-6 h-6 text-gray-400 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                             <span className="ml-3">Overview</span>
                         </Link>
                     </li>
                     <li>
-                        <Link to="/projects" className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                        <Link to="/admin/projects" className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                             <FaLaptopCode className="w-6 h-6 text-gray-400 transition duration-75dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                             <span className="ml-3">Projects</span>
                         </Link>
                     </li>
                     <li>
-                        <Link to="/skills" className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                        <Link to="/admin/skills" className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                             <FaTools className="w-6 h-6 text-gray-400 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                             <span className="ml-3">Skills</span>
                         </Link>
                     </li>
                     <li>
-                        <Link to="/socials" className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                        <Link to="/admin/socials" className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                             <IoMdPhonePortrait className="w-6 h-6 text-gray-400 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                             <span className="ml-3">Socials</span>
                         </Link>

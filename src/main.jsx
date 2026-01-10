@@ -10,28 +10,41 @@ import ProjectsPage from "./pages/ProjectsPage.jsx";
 import SkillsPage from "./pages/SkillsPage.jsx";
 import SocialPage from "./pages/SocialPage.jsx";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import LoginPage from './pages/LoginPage.jsx'
+import LoginLayout from './layouts/LoginLayout.jsx'
 
 const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
+    path: "/admin",
     element: <MainLayout />,
     children: [
       {
-        path: "/",
+        path: "",
         element: <Homepage />
       },
       {
-        path: "/projects",
+        path: "projects",
         element: <ProjectsPage />
       },
       {
-        path: "/skills",
+        path: "skills",
         element: <SkillsPage />
       },
       {
-        path: "/socials",
+        path: "socials",
         element: <SocialPage />
+      }
+    ]
+  }, 
+  {
+    path: "/",
+    element: <LoginLayout />,
+    children: [
+      {
+        path: "/",
+        element: <LoginPage/>
       }
     ]
   }
