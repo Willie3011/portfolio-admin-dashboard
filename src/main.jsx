@@ -5,7 +5,10 @@ import App from './App.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import MainLayout from './layouts/MainLayout.jsx'
-import AboutPage from './pages/AboutPage.jsx'
+import Homepage from './pages/Homepage.jsx';
+import ProjectsPage from "./pages/ProjectsPage.jsx";
+import SkillsPage from "./pages/SkillsPage.jsx";
+import SocialPage from "./pages/SocialPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -13,7 +16,19 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <AboutPage/>
+        element: <Homepage/>
+      },
+      {
+        path: "/projects",
+        element: <ProjectsPage/>
+      },
+      {
+        path: "/skills",
+        element: <SkillsPage/>
+      },
+      {
+        path: "/socials",
+        element: <SocialPage/>
       }
     ]
   }
