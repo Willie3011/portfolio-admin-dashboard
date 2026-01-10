@@ -1,12 +1,12 @@
 import React from 'react'
+import Cards from '../components/Cards'
 
 function Homepage() {
   return (
-    <div className='grid grid-cols-12 gap-6'>
+    <div className=''>
       {/*Stats*/}
-      <div className="col-span-12 md:col-span-3 bg-white p-4 rounded-xl shadow">
-        Total Projects
-      </div>
+      <Cards/>
+      
 
       {/* About me section */}
     </div>
