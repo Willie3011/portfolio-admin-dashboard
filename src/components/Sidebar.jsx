@@ -9,8 +9,8 @@ function Sidebar({ open, setOpen }) {
     return (
         <aside className={`fixed md:static top-0 left-0 w-64 z-40 h-screen transition-transform duration-300 ${open ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}>
             <section className="overflow-y-auto py-5 px-3 h-full bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-                <div className="flex items-center justify-between pr-2">
-                    <h2 className="p-2 mb-2 text-2xl font-bold text-gray-900 dark:text-white">Willem April</h2>
+                <div className="flex items-center justify-between p-2 mb-4">
+                    <h2 className="text-xl font-bold text-gray-900 dark:text-white">Willem April</h2>
                     <button className="w-6 h-6 text-gray-400 dark:text-white rounded-lg flex items-center justify-center focus:border" onClick={() => setOpen(false)}>
                         <IoClose className="w-full h-full"/>
                     </button>
