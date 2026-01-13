@@ -7,7 +7,7 @@ function MainLayout() {
   const [openSidebar, setOpenSidebar] = useState(false);
   return (
     <div className="grid grid-rows-[60px_1fr] min-h-screen">
-      <header className="bg-white dark:bg-gray-800 dark:text-white text-gray-900 border-b px-6 flex items-center justify-between">
+      <header className="bg-white dark:bg-gray-800 dark:text-white text-gray-900 border-b border-gray-400 dark:border-gray-600 px-6 flex items-center justify-between">
         <div className="flex items-center gap-4">
           <button className="md:hidden flex items-center justify-center w-6 h-6" onClick={() => setOpenSidebar(true)}><IoMenu className="w-full h-full"/></button>
           <h1 className="font-bold text-xl">Willem April</h1>
@@ -17,7 +17,7 @@ function MainLayout() {
 
       <section className="grid grid-cols-1 md:grid-cols-[240px_1fr]">
         <Sidebar open={openSidebar} setOpen={setOpenSidebar} />
-        <main className="bg-gray-100 p-6">
+        <main className="bg-gray-50 p-6 dark:bg-gray-900">
           <Outlet />
         </main>
       </section>
