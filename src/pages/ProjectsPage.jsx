@@ -55,7 +55,7 @@ function ProjectsPage() {
           return row[key];
         }}
         />
-      <Modal  isOpen={adding} onClose={setAdding} title="Add Project" children={<AddProjectForm/>}/>
+      <Modal isOpen={adding} onClose={setAdding} title="Add New Project" children={<AddProjectForm onClose={ setAdding } />}/>
     </section>
   )
 }
