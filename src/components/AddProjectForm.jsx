@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Select from "react-select/base"
-import ImageUpload from "./imageUpload";
+import ImageUpload from "./ImageUpload";
 
 function AddProjectForm() {
     const [imageFile, setImageFile] = useState(null);
