@@ -5,7 +5,6 @@ import { useQuery } from "@tanstack/react-query";
 import { CiStar } from "react-icons/ci";
 import Modal from "../components/Modal";
 import { useState } from "react";
-import CreateProjectModal from "../components/CreateProjectModal";
 import AddProjectForm from "../components/AddProjectForm";
 
 const fetchProjects = async () => {
