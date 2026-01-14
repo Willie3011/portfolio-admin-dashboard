@@ -6,6 +6,7 @@ import { CiStar } from "react-icons/ci";
 import Modal from "../components/Modal";
 import { useState } from "react";
 import AddProjectForm from "../components/AddProjectForm";
+import DeleteProjectForm from "../components/DeleteProjectForm";
 
 const fetchProjects = async () => {
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/projects`);
@@ -15,12 +16,15 @@ const fetchProjects = async () => {
 
 function ProjectsPage() {
   const [adding, setAdding] = useState(false);
+  const [deleting, setDeleting] = useState(false);
+  const [project, setProject] = useState(null);
   const { data = [], isPending, error } = useQuery({
     queryKey: ["projects"],
     queryFn: fetchProjects
   });
 
   if (isPending) return "Loading...";
+  console.log(deleting)
 
   if (error) return error.message;
 
@@ -42,7 +46,10 @@ function ProjectsPage() {
         columns={columns}
         data={data}
         onEdit={(project) => console.log("edit", project)}
-        onDelete={(project) => console.log("delete", project)}
+        onDelete={(project) => {
+          setDeleting(true);
+          setProject(project);
+        }}
         renderCell={(key, row) => {
           if (key === "featured") {
             return (
@@ -56,6 +63,7 @@ function ProjectsPage() {
         }}
         />
       <Modal isOpen={adding} onClose={setAdding} title="Add New Project" children={<AddProjectForm onClose={ setAdding } />}/>
+      <Modal isOpen={deleting} onClose={setDeleting} title="Confirm project deletion" children={<DeleteProjectForm project={ project } onClose={ setDeleting } />}/>
     </section>
   )
 }

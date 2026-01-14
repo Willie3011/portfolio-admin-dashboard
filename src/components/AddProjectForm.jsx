@@ -189,7 +189,7 @@ function AddProjectForm({ onClose }) {
                 <button
                     type="submit"
                     disabled={isLoading}
-                    className="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-primary-700 transition duration-75 cursor-pointer active:scale-95">{isLoading ? "Saving" : "Save Project"}</button>
+                    className="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 transition duration-75 cursor-pointer active:scale-95">{isLoading ? "Saving" : "Save Project"}</button>
             </div>
         </form>
     )
