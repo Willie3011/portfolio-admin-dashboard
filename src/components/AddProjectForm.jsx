@@ -129,7 +129,7 @@ function AddProjectForm({ onClose }) {
 
     return (
         <form onSubmit={handleSubmit}>
-            <div className="grid gap-4 mb-4 sm:grid-cols-2">
+            <div className="grid gap-4 mb-4 sm:grid-cols-2 overflow-y-auto">
                 <div>
                     <label htmlFor="title" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Project title</label>
                     <input type="text" name="title" id="title" value={formData.title} onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder:text-gray-400 dark:text-white" placeholder="Project title" />

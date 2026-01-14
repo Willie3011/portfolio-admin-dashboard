@@ -5,9 +5,9 @@ function Modal({ isOpen, onClose, title, children }) {
     if (!isOpen) return null;
 
     return (
-        <section className={`${isOpen ? "fixed" : "hidden"} overflow-y-auto overflow-x-hidden top- left-0 right-0 z-50 items-center justify-center w-full md:inset-0 md:h-full`}>
+        <section className={`${isOpen ? "fixed" : "hidden"} overflow-y-auto overflow-x-hidden top-0 left-0 right-0 z-50 items-center justify-center w-full md:inset-0 h-full`}>
             {/* Backdrop */}
-            <div className="absolute inset-0 bg-black/70" onClick={onClose}></div>
+            <div className="absolute inset-0 bg-black/70 w-full h-full" onClick={onClose}></div>
             <div className="relative p-4 w-full max-w-2xl h-full md:h-auto">
 
                 <div className="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
