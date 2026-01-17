@@ -66,7 +66,6 @@ function AddProjectForm({ onClose }) {
             ...formData,
             [e.target.name]: e.target.value
         });
-        console.log(formData)
     };
 
     const handleSelectChange = (selectedOptions) => {
@@ -78,7 +77,6 @@ function AddProjectForm({ onClose }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setLoading(true);
         setUploadProgress(0);
 
         try {
@@ -120,8 +118,6 @@ function AddProjectForm({ onClose }) {
         } catch (error) {
             console.error("Error saving project: ", error);
             toast.error(error.message);
-        } finally {
-            setLoading(false);
         }
     }
 
