@@ -13,13 +13,17 @@ import LoginPage from './pages/LoginPage.jsx'
 import LoginLayout from './layouts/LoginLayout.jsx'
 import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+import { AuthProvider } from './context/AuthContext.jsx'
+import ProtectedRoute from './routes/ProtectedRoute.jsx'
 
 const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
     path: "/admin",
-    element: <MainLayout />,
+    element: <ProtectedRoute>
+      <MainLayout />
+      </ProtectedRoute>,
     children: [
       {
         path: "",
@@ -53,10 +57,12 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-      <App />
-      <ToastContainer position='top-right' />
-    </QueryClientProvider>
+    <AuthProvider>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+        <App />
+        <ToastContainer position='top-right' />
+      </QueryClientProvider>
+    </AuthProvider>
   </StrictMode>,
 )
