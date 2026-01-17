@@ -15,7 +15,6 @@ function AddProjectForm({ onClose }) {
         link: ""
     })
     const [imageFile, setImageFile] = useState(null);
-    const [loading, setLoading] = useState(false);
     const [uploadProgress, setUploadProgress] = useState(0);
 
     const queryClient = useQueryClient();
@@ -44,6 +43,7 @@ function AddProjectForm({ onClose }) {
         onSuccess: () => {
             toast.success("Project updated");
             queryClient.invalidateQueries({ queryKey: ['projects'] });
+            onClose(false);
         }
     })
 
@@ -66,6 +66,7 @@ function AddProjectForm({ onClose }) {
             ...formData,
             [e.target.name]: e.target.value
         });
+        console.log(formData)
     };
 
     const handleSelectChange = (selectedOptions) => {
