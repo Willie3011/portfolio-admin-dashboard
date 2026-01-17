@@ -7,6 +7,7 @@ import Modal from "../components/Modal";
 import { useState } from "react";
 import AddProjectForm from "../components/AddProjectForm";
 import DeleteProjectForm from "../components/DeleteProjectForm";
+import UpdateProjectForm from "../components/UpdateProjectForm";
 
 const fetchProjects = async () => {
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/projects`);
@@ -17,6 +18,7 @@ const fetchProjects = async () => {
 function ProjectsPage() {
   const [adding, setAdding] = useState(false);
   const [deleting, setDeleting] = useState(false);
+  const [updating, setUpdating] = useState(false);
   const [project, setProject] = useState(null);
   const { data = [], isPending, error } = useQuery({
     queryKey: ["projects"],
@@ -45,7 +47,10 @@ function ProjectsPage() {
       <Table
         columns={columns}
         data={data}
-        onEdit={(project) => console.log("edit", project)}
+        onEdit={(project) => {
+          setUpdating(true);
+          setProject(project);
+        }}
         onDelete={(project) => {
           setDeleting(true);
           setProject(project);
@@ -63,7 +68,8 @@ function ProjectsPage() {
         }}
         />
       <Modal isOpen={adding} onClose={setAdding} title="Add New Project" children={<AddProjectForm onClose={ setAdding } />}/>
-      <Modal isOpen={deleting} onClose={setDeleting} title="Confirm project deletion" children={<DeleteProjectForm project={ project } onClose={ setDeleting } />}/>
+      <Modal isOpen={deleting} onClose={setDeleting} title="Confirm Project Deletion" children={<DeleteProjectForm project={project} setProject={ setProject } onClose={ setDeleting } />}/>
+      <Modal isOpen={updating} onClose={setUpdating} title="Update Project" children={<UpdateProjectForm project={project} setProject={ setProject } onClose={ setUpdating } />}/>
     </section>
   )
 }
