@@ -7,6 +7,7 @@ import Loading from '../components/Loading';
 import { useState } from 'react';
 import Modal from '../components/Modal';
 import AddSkillForm from '../components/AddSkillForm';
+import UpdateSkillForm from '../components/UpdateSkillForm';
 
 const fetchSkills = async () => {
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/skills`);
@@ -42,8 +43,14 @@ function SkillsPage() {
       <Table
         columns={columns}
         data={data}
-        onEdit={(skill) => console.log("edit", skill)}
-        onDelete={(skill) => console.log("delete", skill)}
+        onEdit={(skill) => {
+          setSkill(skill);
+          setOpenUpdateModal(true);
+        }}
+        onDelete={(skill) => {
+          setSkill(skill)
+          setOpenDeleteModal(true);
+        }}
         renderCell={(key, row) => {
           if (key === "featured") {
             return (
@@ -57,6 +64,7 @@ function SkillsPage() {
         }}
       />
       <Modal isOpen={openAddModal} onClose={setOpenAddModal} title="Add New Skill" children={<AddSkillForm onClose={setOpenAddModal} />} />
+      <Modal isOpen={openUpdateModal} onClose={setOpenUpdateModal} title="Update Skill" children={<UpdateSkillForm skill={skill} onClose={setOpenUpdateModal} />} />
     </section>
   )
 }
