@@ -6,13 +6,27 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { uploadToImageKit } from "../utils/imagekitUpload";
 
+const options = [
+    { value: "html", label: "HTML" },
+    { value: "css", label: "CSS" },
+    { value: "js", label: "JavaScript" },
+    { value: "python", label: "Python" },
+    { value: "csharp", label: "C#" },
+    { value: "java", label: "Java" },
+    { value: "react", label: "React Js" },
+    { value: "express", label: "Express Js" },
+    { value: "mongo", label: "Mongo DB" },
+    { value: "sql", label: "SQL" },
+    { value: "node", label: "Node Js" },
+]
+
 function AddProjectForm({ onClose }) {
     const [formData, setFormData] = useState({
         title: "",
         short_desc: "",
         desc: "",
         techStack: [],
-        link: ""
+        projectLink: ""
     })
     const [imageFile, setImageFile] = useState(null);
     const [uploadProgress, setUploadProgress] = useState(0);
@@ -47,19 +61,6 @@ function AddProjectForm({ onClose }) {
         }
     })
 
-    const options = [
-        { value: "html", label: "HTML" },
-        { value: "css", label: "CSS" },
-        { value: "js", label: "JavaScript" },
-        { value: "python", label: "Python" },
-        { value: "csharp", label: "C#" },
-        { value: "java", label: "Java" },
-        { value: "react", label: "React Js" },
-        { value: "express", label: "Express Js" },
-        { value: "mongo", label: "Mongo DB" },
-        { value: "sql", label: "SQL" },
-        { value: "node", label: "Node Js" },
-    ]
 
     const handleChange = (e) => {
         setFormData({
@@ -132,8 +133,8 @@ function AddProjectForm({ onClose }) {
                     <input type="text" name="title" id="title" value={formData.title} onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder:text-gray-400 dark:text-white" placeholder="Project title" />
                 </div>
                 <div>
-                    <label htmlFor="liveLink" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Link</label>
-                    <input type="text" name="liveLink" id="liveLink" value={formData.liveLink} onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder:text-gray-400 dark:text-white" placeholder="Project title" />
+                    <label htmlFor="projectLink" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Link</label>
+                    <input type="text" name="projectLink" id="projectLink" value={formData.projectLink} onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder:text-gray-400 dark:text-white" placeholder="Project title" />
                 </div>
                 <div>
                     <label htmlFor="techStack" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tech stack</label>

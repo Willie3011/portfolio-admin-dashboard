@@ -33,6 +33,7 @@ function ProjectsPage() {
   const columns = [
     { key: "title", label: "Project title" },
     { key: "desc", label: "Description" },
+    { key: "projectLink", label: "Live Link" },
     { key: "featured", label: "Featured" }
   ];
 
