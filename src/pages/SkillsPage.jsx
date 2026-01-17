@@ -8,6 +8,7 @@ import { useState } from 'react';
 import Modal from '../components/Modal';
 import AddSkillForm from '../components/AddSkillForm';
 import UpdateSkillForm from '../components/UpdateSkillForm';
+import DeleteSkillForm from '../components/DeleteSkillForm';
 
 const fetchSkills = async () => {
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/skills`);
@@ -65,6 +66,7 @@ function SkillsPage() {
       />
       <Modal isOpen={openAddModal} onClose={setOpenAddModal} title="Add New Skill" children={<AddSkillForm onClose={setOpenAddModal} />} />
       <Modal isOpen={openUpdateModal} onClose={setOpenUpdateModal} title="Update Skill" children={<UpdateSkillForm skill={skill} onClose={setOpenUpdateModal} />} />
+      <Modal isOpen={openDeleteModal} onClose={setOpenDeleteModal} title="Delete Skill" children={<DeleteSkillForm skill={skill} onClose={setOpenDeleteModal} />} />
     </section>
   )
 }
