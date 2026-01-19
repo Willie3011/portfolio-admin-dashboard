@@ -45,7 +45,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     const logout = async () => {
-        await axios.post(`${import.meta.env.VITE_API_URL}/logout`, {}, { withCredentials: true });
+        await axios.post(`${import.meta.env.VITE_API_URL}/users/logout`, {}, { withCredentials: true });
         setUser(null);
         setIsAuthenticated(false);
     }

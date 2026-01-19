@@ -5,9 +5,11 @@ import { FaLaptopCode } from "react-icons/fa6";
 import { IoMdPhonePortrait } from "react-icons/io";
 import { IoClose } from "react-icons/io5";
 import { CiLogout } from "react-icons/ci";
+import { useAuth } from "../context/AuthContext";
 
 
 function Sidebar({ open, setOpen }) {
+    const { logout } = useAuth();
     return (
         <aside className={`fixed md:static top-0 md:top-15 left-0 w-64 z-40 h-dvh md:h-[100vh-60px] transition-transform duration-300 ${open ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}>
             <section className="overflow-y-auto py-2 px-3 h-full flex flex-col bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700">
@@ -53,10 +55,10 @@ function Sidebar({ open, setOpen }) {
                 </ul>
                 <ul className="pt-5 mt-auto md:mb-16">
                     <li>
-                        <Link className="flex items-center p-2 mt-auto text-base font-normal text-gray-900 rounded-lg transition duration-75 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group" to="/settings">
+                        <button type="button" onClick={() => logout()} className="flex items-center w-full p-2 mt-auto text-base font-normal text-gray-900 rounded-lg transition duration-75 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group">
                             <CiLogout className="flex-shink-0 w-6 h-6 text-gray-400 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                             <span className="ml-3">Logout</span>
-                        </Link>
+                        </button>
                     </li>
 
                 </ul>
