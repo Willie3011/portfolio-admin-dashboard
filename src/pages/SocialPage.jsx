@@ -8,6 +8,7 @@ import { useState } from 'react';
 import Modal from '../components/Modal';
 import AddSocialForm from '../components/AddSocialForm';
 import UpdateSocialForm from '../components/UpdateSocialForm';
+import DeleteSocialForm from '../../DeleteSocialForm';
 
 const fetchSocials = async () => {
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/socials`);
@@ -49,7 +50,7 @@ function SocialPage() {
           setOpenUpdateModal(true);
         }}
         onDelete={(social) => {
-          setSkill(social)
+          setSocial(social)
           setOpenDeleteModal(true);
         }}
         renderCell={(key, row) => {
@@ -66,6 +67,7 @@ function SocialPage() {
       />
       <Modal isOpen={openAddModal} onClose={setOpenAddModal} title="Add New Social Link" children={<AddSocialForm onClose={setOpenAddModal} />} />
       <Modal isOpen={openUpdateModal} onClose={setOpenUpdateModal} title="Update Social Link" children={<UpdateSocialForm social={social} onClose={setOpenUpdateModal} />} />
+      <Modal isOpen={openDeleteModal} onClose={setOpenDeleteModal} title="Delete Social Link" children={<DeleteSocialForm social={social} onClose={setOpenDeleteModal} />} />
     </section>
   )
 }
