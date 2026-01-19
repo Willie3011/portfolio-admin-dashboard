@@ -7,6 +7,7 @@ import Loading from '../components/Loading';
 import { useState } from 'react';
 import Modal from '../components/Modal';
 import AddSocialForm from '../components/AddSocialForm';
+import UpdateSocialForm from '../components/UpdateSocialForm';
 
 const fetchSocials = async () => {
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/socials`);
@@ -63,7 +64,8 @@ function SocialPage() {
           return row[key]
         }}
       />
-      <Modal isOpen={openAddModal} onClose={setOpenAddModal} title="Add New Skill" children={<AddSocialForm onClose={setOpenAddModal} />} />
+      <Modal isOpen={openAddModal} onClose={setOpenAddModal} title="Add New Social Link" children={<AddSocialForm onClose={setOpenAddModal} />} />
+      <Modal isOpen={openUpdateModal} onClose={setOpenUpdateModal} title="Update Social Link" children={<UpdateSocialForm social={social} onClose={setOpenUpdateModal} />} />
     </section>
   )
 }
