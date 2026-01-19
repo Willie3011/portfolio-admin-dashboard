@@ -9,11 +9,12 @@ import AddProjectForm from "../components/AddProjectForm";
 import DeleteProjectForm from "../components/DeleteProjectForm";
 import UpdateProjectForm from "../components/UpdateProjectForm";
 import Loading from "../components/Loading";
+import Pagination from "../components/Pagination";
 
-const fetchProjects = async () => {
-  const res = await axios.get(`${import.meta.env.VITE_API_URL}/projects`);
-
-  return res.data.data;
+const fetchProjects = async ({ page, limit}) => {
+  const res = await axios.get(`${import.meta.env.VITE_API_URL}/projects?page=${page}&limit=${limit}`);
+  console.log(res.data.projects)
+  return res.data.projects;
 }
 
 function ProjectsPage() {
@@ -21,10 +22,15 @@ function ProjectsPage() {
   const [deleting, setDeleting] = useState(false);
   const [updating, setUpdating] = useState(false);
   const [project, setProject] = useState(null);
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(10);
+
   const { data = [], isPending, error } = useQuery({
     queryKey: ["projects"],
-    queryFn: fetchProjects
+    queryFn: () => fetchProjects({ page, limit }),
   });
+
+  const { data: projects, pagination } = data;
 
   if (isPending) return <Loading />;
   if (error) return error.message;
@@ -46,7 +52,7 @@ function ProjectsPage() {
 
       <Table
         columns={columns}
-        data={data}
+        data={projects}
         onEdit={(project) => {
           setUpdating(true);
           setProject(project);
@@ -66,7 +72,18 @@ function ProjectsPage() {
           
           return row[key];
         }}
-        />
+      />
+      <Pagination
+        page={pagination.page}
+        totalPages={pagination.totalPages}
+        total={pagination.total}
+        limit={pagination.limit}
+        onPageChange={setPage}
+        onLimitChange={(newLimit) => {
+          SiRelianceindustrieslimited(newLimit);
+          setPage(1);
+        }}
+      />
       <Modal isOpen={adding} onClose={setAdding} title="Add New Project" children={<AddProjectForm onClose={ setAdding } />}/>
       <Modal isOpen={deleting} onClose={setDeleting} title="Confirm Project Deletion" children={<DeleteProjectForm project={project} setProject={ setProject } onClose={ setDeleting } />}/>
       <Modal isOpen={updating} onClose={setUpdating} title="Update Project" children={<UpdateProjectForm project={project} setProject={ setProject } onClose={ setUpdating } />}/>
