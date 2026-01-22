@@ -24,9 +24,10 @@ function UpdateProjectForm({ project, onClose }) {
     const queryClient = useQueryClient();
     const [formData, setFormData] = useState({
         title: "",
-        short_desc: "",
+        shortDesc: "",
         desc: "",
-        liveLink: "",
+        projectLink: "",
+        githubLink: "",
         techStack: [],
     });
 
@@ -40,9 +41,10 @@ function UpdateProjectForm({ project, onClose }) {
 
         setFormData({
             title: project.title || "",
-            short_desc: project.short_desc || "",
+            shortDesc: project.shortDesc || "",
             desc: project.desc || "",
-            liveLink: project.liveLink || "",
+            liveLink: project.projectLink || "",
+            githubLink: project.githubLink || "",
             techStack: project.techStack || [],
         });
     }, [project]);
@@ -78,6 +80,7 @@ function UpdateProjectForm({ project, onClose }) {
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
+        console.log(formData)
     };
 
     const handleTechChange = (options) => {
@@ -92,10 +95,10 @@ function UpdateProjectForm({ project, onClose }) {
 
         let image;
         try {
-            
+
             if (imageFile) {
                 setProgress(0);
-                
+
                 const uploadResponse = await uploadToImageKit(imageFile, {
                     folder: 'projects/',
                     onProgress: (event) => {
@@ -104,13 +107,13 @@ function UpdateProjectForm({ project, onClose }) {
                         setProgress(progressPercent);
                     }
                 });
-                
+
                 image = {
                     filePath: uploadResponse.filePath,
                     fileId: uploadResponse.fileId
                 }
             }
-            
+
             updateMutation.mutate({
                 id: project._id,
                 updates: {
@@ -138,17 +141,31 @@ function UpdateProjectForm({ project, onClose }) {
                     label="Project Title"
                     name="title"
                     value={formData.title}
+                    
+                    onChange={handleChange}
+                />
+                <Textarea
+                    label="Short Description"
+                    name="shortDesc"
+                    value={formData.shortDesc}
                     onChange={handleChange}
                 />
 
                 <Input
                     label="Live Link"
-                    name="liveLink"
+                    name="projectLink"
                     value={formData.liveLink}
                     onChange={handleChange}
                 />
 
-                <div>
+                <Input
+                    label="Github Link"
+                    name="githubLink"
+                    value={formData.githubLink}
+                    onChange={handleChange}
+                />
+
+                <div className="sm:col-span-2">
                     <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tech Stack</label>
                     <Select
                         isMulti
@@ -158,12 +175,6 @@ function UpdateProjectForm({ project, onClose }) {
                     />
                 </div>
 
-                <Textarea
-                    label="Short Description"
-                    name="short_desc"
-                    value={formData.short_desc}
-                    onChange={handleChange}
-                />
 
                 <div className="sm:col-span-2">
                     <Textarea
@@ -192,7 +203,7 @@ function UpdateProjectForm({ project, onClose }) {
                             <span>{Math.round(progress)}%</span>
                         </div>
                         <div className="w-full bg-gray-700 rounded-full h-2">
-                            <div className="bg-blue-500 h-2rounded-full transition-all duration-300" style={{width: `${progress}%`}}></div>
+                            <div className="bg-blue-500 h-2rounded-full transition-all duration-300" style={{ width: `${progress}%` }}></div>
                         </div>
                     </div>
                 )

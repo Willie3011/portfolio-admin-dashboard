@@ -23,10 +23,11 @@ const options = [
 function AddProjectForm({ onClose }) {
     const [formData, setFormData] = useState({
         title: "",
-        short_desc: "",
+        shortDesc: "",
         desc: "",
         techStack: [],
-        projectLink: ""
+        projectLink: "",
+        githubLink: ""
     })
     const [imageFile, setImageFile] = useState(null);
     const [uploadProgress, setUploadProgress] = useState(0);
@@ -133,16 +134,20 @@ function AddProjectForm({ onClose }) {
                     <input type="text" name="title" id="title" value={formData.title} onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder:text-gray-400 dark:text-white" placeholder="Project title" />
                 </div>
                 <div>
-                    <label htmlFor="projectLink" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Link</label>
-                    <input type="text" name="projectLink" id="projectLink" value={formData.projectLink} onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder:text-gray-400 dark:text-white" placeholder="Project title" />
+                    <label htmlFor="shortDesc" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Short description</label>
+                    <textarea name="shortDesc" id="shortDesc" value={formData.shortDesc} onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder:text-gray-400 dark:text-white resize-none" placeholder="Short description" />
                 </div>
                 <div>
+                    <label htmlFor="projectLink" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Live Link</label>
+                    <input type="text" name="projectLink" id="projectLink" value={formData.projectLink} onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder:text-gray-400 dark:text-white" placeholder="Live Link" />
+                </div>
+                <div>
+                    <label htmlFor="githubLink" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Github Link</label>
+                    <input type="text" name="githubLink" id="githubLink" value={formData.githubLink} onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder:text-gray-400 dark:text-white" placeholder="Github link" />
+                </div>
+                <div className="sm:col-span-2">
                     <label htmlFor="techStack" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tech stack</label>
                     <Select name="techStack" id="techStack" isMulti options={options} value={formData.techStack} onChange={handleSelectChange} classNames="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder:text-gray-400 dark:text-white" styles={{ control: (base) => ({ ...base, backgroundColor: "transparent" }) }} />
-                </div>
-                <div>
-                    <label htmlFor="short_desc" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Short description</label>
-                    <textarea name="short_desc" id="short_desc" value={formData.short_desc} onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder:text-gray-400 dark:text-white resize-none" placeholder="Project title" />
                 </div>
                 <div className="sm:col-span-2">
                     <label htmlFor="desc" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>

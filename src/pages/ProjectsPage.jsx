@@ -13,7 +13,6 @@ import Pagination from "../components/Pagination";
 
 const fetchProjects = async ({ page, limit}) => {
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/projects?page=${page}&limit=${limit}`);
-  console.log(res.data.projects)
   return res.data.projects;
 }
 
