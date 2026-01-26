@@ -37,7 +37,7 @@ function Table({ columns, data, onEdit, onDelete, renderCell }) {
                         <tr key={row._id} className="odd:bg-gray-50 dark:odd:bg-gray-800 even:bg-gray-100 dark:even:bg-gray-900 border-b border-gray-200 dark:border-gray-600 dark:text-white">
                             {
                                 columns.map(col => (
-                                    <td key={col.key} className="px-6 py-4">
+                                    <td key={col.key} className="px-6 py-4 max-w-100">
                                         {renderCell ? renderCell(col.key, row) : row[col.key]}
                                     </td>
                                 ))
