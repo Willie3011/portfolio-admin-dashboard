@@ -1,13 +1,11 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { useUpdateSocialMutation } from "../queries/mutations";
 
 function UpdateSocialForm({ social, onClose }) {
-    const queryClient = useQueryClient();
     const [name, setName] = useState("");
     const [link, setLink] = useState("");
-    const [error, setError] = useState(null);
+
     /* Populate form once */
     useEffect(() => {
         if (!social) return;
@@ -15,28 +13,10 @@ function UpdateSocialForm({ social, onClose }) {
         setLink(social.link || "");
     }, [social]);
 
-    const updateMutation = useMutation({
-        mutationFn: async ({ id, updates }) => {
-            const res = await axios.patch(
-                `${import.meta.env.VITE_API_URL}/socials/${id}`,
-                updates,
-                { withCredentials: true }
-            );
-            return res.data;
-        },
-        onSuccess: () => {
-            toast.success("Social updated successfully");
-            queryClient.invalidateQueries({ queryKey: ["socials"] });
-            onClose(false);
-        },
-        onError: (err) => {
-            setError(err)
-        },
-    });
+    const updateMutation = useUpdateSocialMutation(onClose);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setError(null);
 
         try {
             updateMutation.mutate({
@@ -48,11 +28,12 @@ function UpdateSocialForm({ social, onClose }) {
             });
         } catch (error) {
             console.log("Submit error: ", error);
-            setError(error);
+            toast.error(error.message);
         }
     };
 
     const isLoading = updateMutation.isPending;
+    const error = updateMutation.error;
  
     return (
         <form onSubmit={handleSubmit} className="space-y-4">

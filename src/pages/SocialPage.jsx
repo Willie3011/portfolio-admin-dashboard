@@ -1,19 +1,13 @@
 import Table from '../components/Table'
-import { useQuery } from '@tanstack/react-query';
-import { CiStar } from 'react-icons/ci';
-import axios from 'axios';
 import { FaPlus } from 'react-icons/fa';
 import Loading from '../components/Loading';
 import { useState } from 'react';
 import Modal from '../components/Modal';
 import AddSocialForm from '../components/AddSocialForm';
 import UpdateSocialForm from '../components/UpdateSocialForm';
-import DeleteSocialForm from '../../DeleteSocialForm';
+import DeleteSocialForm from '../components/DeleteSocialForm';
+import { useFetchSocials } from '../queries/queries';
 
-const fetchSocials = async () => {
-  const res = await axios.get(`${import.meta.env.VITE_API_URL}/socials`);
-  return res.data.data
-}
 
 function SocialPage() {
   const [openAddModal, setOpenAddModal] = useState(false);
@@ -21,10 +15,7 @@ function SocialPage() {
   const [openUpdateModal, setOpenUpdateModal] = useState(false);
   const [social, setSocial] = useState(null);
 
-  const { data = [], isPending, error } = useQuery({
-    queryKey: ["socials"],
-    queryFn: fetchSocials
-  });
+  const { data = [], isPending, error } = useFetchSocials()
 
   if (isPending) return <Loading />;
   if (error) return error.message;
@@ -54,14 +45,6 @@ function SocialPage() {
           setOpenDeleteModal(true);
         }}
         renderCell={(key, row) => {
-          if (key === "featured") {
-            return (
-              <button>
-                <CiStar className={row.featured ? "text-yellow-400" : ""} />
-              </button>
-            )
-          }
-
           return row[key]
         }}
       />

@@ -1,25 +1,12 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import axios from 'axios';
-import { toast } from 'react-toastify';
+import { useDeleteSocialMutation } from '../queries/mutations';
 
 function DeleteSocialForm({ social, onClose }) {
     const socialId = social?._id;
 
-    const queryClient = useQueryClient();
-
-    const deleteMutation = useMutation({
-        mutationFn: async () => {
-            return axios.delete(`${import.meta.env.VITE_API_URL}/socials/${socialId}`, { withCredentials: true })
-        },
-        onSuccess: () => {
-            toast.success("Social deleted successfully!");
-            queryClient.invalidateQueries({ queryKey: ["socials"] })
-            onClose(false);
-        }
-    })
-
+    const deleteMutation = useDeleteSocialMutation(onClose);
+    
     const handleDelete = () => {
-        deleteMutation.mutate();
+        deleteMutation.mutate(socialId);
     };
 
     return (

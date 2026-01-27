@@ -2,29 +2,15 @@ import { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useAddSocialMutation } from "../queries/mutations";
 
 
 function AddSocialForm({ onClose }) {
     const [name, setName] = useState("");
     const [link, setLink] = useState("");
 
-    const queryClient = useQueryClient();
-
     // Creating skill
-    const createSocialMutation = useMutation({
-        mutationFn: async (newSocial) => {
-            const response = await axios.post(`${import.meta.env.VITE_API_URL}/socials`, newSocial, { withCredentials: true })
-            return response.data.social;
-        },
-        onSuccess: () => {
-            toast.success("Social has been added!");
-            queryClient.invalidateQueries({ queryKey: ['socials'] });
-            onClose(false)
-        },
-        onError: (error) => {
-            toast.error(error.response.data.message)
-        }
-    })
+    const createSocialMutation = useAddSocialMutation(onClose);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
