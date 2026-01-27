@@ -1,25 +1,13 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import axios from 'axios';
-import { toast } from 'react-toastify';
+import { useDeleteSkillMutation } from '../queries/mutations';
 
 function DeleteSkillForm({ skill, onClose }) {
     const skillId = skill?._id;
 
-    const queryClient = useQueryClient();
 
-    const deleteMutation = useMutation({
-        mutationFn: async () => {
-            return axios.delete(`${import.meta.env.VITE_API_URL}/skills/${skillId}`, { withCredentials: true })
-        },
-        onSuccess: () => {
-            toast.success("Skill deleted successfully!");
-            queryClient.invalidateQueries({ queryKey: ["skills"] })
-            onClose(false);
-        }
-    })
+    const deleteMutation = useDeleteSkillMutation(onClose);
 
     const handleDelete = () => {
-        deleteMutation.mutate();
+        deleteMutation.mutate(skillId);
     };
 
     return (

@@ -9,6 +9,7 @@ import Modal from '../components/Modal';
 import AddSkillForm from '../components/AddSkillForm';
 import UpdateSkillForm from '../components/UpdateSkillForm';
 import DeleteSkillForm from '../components/DeleteSkillForm';
+import { useFecthSkills } from '../queries/queries';
 
 const fetchSkills = async () => {
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/skills`);
@@ -21,10 +22,7 @@ function SkillsPage() {
   const [openUpdateModal, setOpenUpdateModal] = useState(false);
   const [skill, setSkill] = useState(null);
 
-  const { data = [], isPending, error } = useQuery({
-    queryKey: ["skills"],
-    queryFn: fetchSkills
-  });
+  const { data = [], isPending, error } = useFecthSkills();
 
   if (isPending) return <Loading />;
   if (error) return error.message;

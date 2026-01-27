@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useAddSkillMutation } from "../queries/mutations";
 
 
 function AddSkillForm({ onClose }) {
@@ -10,30 +11,19 @@ function AddSkillForm({ onClose }) {
     const queryClient = useQueryClient();
 
     // Creating skill
-    const createSkillMutation = useMutation({
-        mutationFn: async (newSkill) => {
-            const response = await axios.post(`${import.meta.env.VITE_API_URL}/skills`, newSkill, { withCredentials: true })
-            return response.data.skill;
-        },
-        onSuccess: () => {
-            toast.success("Skill has been added!");
-            queryClient.invalidateQueries({ queryKey: ['skills'] });
-            onClose(false)
-        },
-        onError: (error) => {
-            toast.error(error.response.data.message)
-        }
-    })
+    const addSkillMutation = useAddSkillMutation(onClose);
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
-            const newSkill = {
+            const skill = {
                 name: name
             };
 
-            await createSkillMutation.mutateAsync(newSkill);
+            addSkillMutation.mutate(skill);
+            
             setName("")
             
         } catch (error) {
@@ -42,8 +32,8 @@ function AddSkillForm({ onClose }) {
         }
     }
 
-    const isLoading = createSkillMutation.isPending;
-    const error = createSkillMutation.error;
+    const isLoading = addSkillMutation.isPending;
+    const error = addSkillMutation.error;
 
     return (
         <form onSubmit={handleSubmit}>

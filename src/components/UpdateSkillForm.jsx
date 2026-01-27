@@ -2,36 +2,18 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { useUpdateSkillMutation } from "../queries/mutations";
 
 function UpdateSkillForm({ skill, onClose }) {
-    const queryClient = useQueryClient();
     const [name, setName] = useState("");
-    const [error, setError] = useState(null);
     /* Populate form once */
     useEffect(() => {
         if (!skill) return;
         setName(skill.name || "");
     }, [skill]);
 
-    const updateMutation = useMutation({
-        mutationFn: async ({ id, updates }) => {
-            const res = await axios.patch(
-                `${import.meta.env.VITE_API_URL}/skills/${id}`,
-                updates,
-                { withCredentials: true }
-            );
-            return res.data;
-        },
-        onSuccess: () => {
-            toast.success("Skill updated successfully");
-            queryClient.invalidateQueries({ queryKey: ["skills"] });
-            onClose(false);
-        },
-        onError: (err) => {
-            setError(err)
-        },
-    });
-
+    const updateMutation = useUpdateSkillMutation(onClose);;
+        
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -41,13 +23,17 @@ function UpdateSkillForm({ skill, onClose }) {
                     name: name
                 }
             });
+            
+        
         } catch (error) {
             console.log("Submit error: ", error);
-            setError(error);
+            toast.error(error.message)
         }
+            
     };
 
     const isLoading = updateMutation.isPending;
+    const error = updateMutation.error;
 
     return (
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -63,7 +49,7 @@ function UpdateSkillForm({ skill, onClose }) {
                 error && (
                     <div className="text-red-400 text-sm bg-red-900/20 border border-red-800 rounded p-3">
                         {
-                            error?.response?.data?.message || error?.message || "Something went wrong while updating the project"
+                            error?.response?.data?.message || error?.message || "Something went wrong while updating the skill"
                         }
                     </div>
                 )
