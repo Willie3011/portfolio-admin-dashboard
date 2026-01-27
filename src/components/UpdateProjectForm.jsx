@@ -5,6 +5,7 @@ import Select from "react-select";
 import { toast } from "react-toastify";
 import ImageUpload from "./ImageUpload";
 import { uploadToImageKit } from "../utils/imagekitUpload";
+import { useUpdateProjectMutation } from "../queries/mutations";
 
 const TECH_OPTIONS = [
     { value: "html", label: "HTML" },
@@ -58,24 +59,25 @@ function UpdateProjectForm({ project, onClose }) {
         [formData.techStack]
     );
 
-    const updateMutation = useMutation({
-        mutationFn: async ({ id, updates }) => {
-            const res = await axios.patch(
-                `${import.meta.env.VITE_API_URL}/projects/${id}`,
-                updates,
-                { withCredentials: true }
-            );
-            return res.data;
-        },
-        onSuccess: () => {
-            toast.success("Project updated successfully");
-            queryClient.invalidateQueries({ queryKey: ["projects"] });
-            onClose(false);
-        },
-        onError: (err) => {
-            setError(err)
-        },
-    });
+    const updateMutation = useUpdateProjectMutation(onClose);
+    //     useMutation({
+    //     mutationFn: async ({ id, updates }) => {
+    //         const res = await axios.patch(
+    //             `${import.meta.env.VITE_API_URL}/projects/${id}`,
+    //             updates,
+    //             { withCredentials: true }
+    //         );
+    //         return res.data;
+    //     },
+    //     onSuccess: () => {
+    //         toast.success("Project updated successfully");
+    //         queryClient.invalidateQueries({ queryKey: ["projects"] });
+    //         onClose(false);
+    //     },
+    //     onError: (err) => {
+    //         setError(err)
+    //     },
+    // });
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -121,7 +123,7 @@ function UpdateProjectForm({ project, onClose }) {
                     ...(image && { image: image }),
                 }
             });
-            // onClose(false);
+            
         } catch (error) {
             console.log("Submit error: ", error);
             setError(error);

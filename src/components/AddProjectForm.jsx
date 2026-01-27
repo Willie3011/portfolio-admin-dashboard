@@ -1,10 +1,9 @@
 import { useState } from "react";
 import Select from "react-select"
 import ImageUpload from "./ImageUpload";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
 import { toast } from "react-toastify";
 import { uploadToImageKit } from "../utils/imagekitUpload";
+import { useAddProjectMutation, useUpdateProjectMutation } from "../queries/mutations";
 
 const options = [
     { value: "html", label: "HTML" },
@@ -32,35 +31,9 @@ function AddProjectForm({ onClose }) {
     const [imageFile, setImageFile] = useState(null);
     const [uploadProgress, setUploadProgress] = useState(0);
 
-    const queryClient = useQueryClient();
-
-    // Creating project
-    const createProjectMutation = useMutation({
-        mutationFn: async (newProject) => {
-            const response = await axios.post(`${import.meta.env.VITE_API_URL}/projects`, newProject, { withCredentials: true })
-            return response.data.project;
-        },
-        onSuccess: (res) => {
-            toast.success("Project has been added!");
-            queryClient.invalidateQueries({ queryKey: ['projects'] });
-        },
-        onError: (error) => {
-            toast.error(error.response.data.message)
-        }
-    })
-
+    const addProjectMutation = useAddProjectMutation();
     // Updating Project
-    const updateProjectMutaion = useMutation({
-        mutationFn: async ({ projectId, image }) => {
-            const response = await axios.patch(`${import.meta.env.VITE_API_URL}/projects/${projectId}`, { image }, { withCredentials: true });
-            return response.data.data.project
-        },
-        onSuccess: () => {
-            toast.success("Project updated");
-            queryClient.invalidateQueries({ queryKey: ['projects'] });
-            onClose(false);
-        }
-    })
+    const updateProjectMutaion = useUpdateProjectMutation(onClose);
 
 
     const handleChange = (e) => {
@@ -88,9 +61,8 @@ function AddProjectForm({ onClose }) {
                 image: null
             };
 
-            const savedProject = await createProjectMutation.mutateAsync(projectData);
-            const projectId = savedProject._id;
-
+            const savedProject = await addProjectMutation.mutateAsync(projectData);
+            const projectId = await savedProject._id;
             // If there's an image upload it to imagekit
             if (imageFile) {
                 try {
@@ -107,10 +79,7 @@ function AddProjectForm({ onClose }) {
                         fileId: uploadResponse.fileId
                     }
 
-                    await updateProjectMutaion.mutateAsync({
-                        projectId,
-                        image
-                    })
+                    await updateProjectMutaion.mutateAsync(projectId,image)
 
                 } catch (error) {
                     console.error("Image upload failed: ", error);
@@ -123,8 +92,8 @@ function AddProjectForm({ onClose }) {
         }
     }
 
-    const isLoading = createProjectMutation.isPending || updateProjectMutaion.isPending;
-    const error = createProjectMutation.error || updateProjectMutaion.error;
+    const isLoading = addProjectMutation.isPending || updateProjectMutaion.isPending;
+    const error = addProjectMutation.error || updateProjectMutaion.error;
 
     return (
         <form onSubmit={handleSubmit}>

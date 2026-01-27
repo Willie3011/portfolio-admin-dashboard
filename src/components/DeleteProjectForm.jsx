@@ -1,29 +1,16 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import axios from 'axios';
-import { toast } from 'react-toastify';
+import { useDeleteProjectMutation } from '../queries/mutations';
 
 function DeleteProjectForm({ project, onClose }) {
     const projectId = project?._id;
-
-    const queryClient = useQueryClient();
     
-    const deleteMutation = useMutation({
-        mutationFn: async () => {
-            return axios.delete(`${import.meta.env.VITE_API_URL}/projects/${projectId}`, {withCredentials: true})
-        },
-        onSuccess: () => {
-            toast.success("Project deleted successfully!");
-            queryClient.invalidateQueries({queryKey: ["projects"]})
-            handleCloseModal();
-        }
-    })
-
     const handleCloseModal = () => {
         onClose(false);
     }
 
+    const deleteMutation = useDeleteProjectMutation(handleCloseModal);
+
     const handleDelete = () => {
-        deleteMutation.mutate();
+        deleteMutation.mutate(projectId);
 
     };
 

@@ -10,11 +10,9 @@ import DeleteProjectForm from "../components/DeleteProjectForm";
 import UpdateProjectForm from "../components/UpdateProjectForm";
 import Loading from "../components/Loading";
 import Pagination from "../components/Pagination";
+import { useFetchProjects } from "../queries/queries";
 
-const fetchProjects = async ({ page, limit}) => {
-  const res = await axios.get(`${import.meta.env.VITE_API_URL}/projects?page=${page}&limit=${limit}`);
-  return res.data.projects;
-}
+
 
 function ProjectsPage() {
   const [adding, setAdding] = useState(false);
@@ -24,10 +22,7 @@ function ProjectsPage() {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
 
-  const { data = [], isPending, error } = useQuery({
-    queryKey: ["projects"],
-    queryFn: () => fetchProjects({ page, limit }),
-  });
+  const { data = [], isPending, error } = useFetchProjects(page, limit)
 
   const { data: projects, pagination } = data;
 
