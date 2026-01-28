@@ -2,26 +2,25 @@ import React from 'react'
 import Card from './Card';
 import { FaProjectDiagram, FaTools, FaShareAlt } from "react-icons/fa";
 
-function Cards() {
+function Cards({projects, skills, socials}) {
     const cards = [
         {
             title: "Projects",
-            value: 12,
+            value: projects.length,
             icon: FaProjectDiagram,
             to: "/admin/projects",
-            gradient: "from-blue-100 to-blue-50",
         },
         {
             title: "Skills",
+            value: skills.length,
             icon: FaTools,
             to: "/admin/skills",
-            gradient: "from-purple-100 to-purple-50",
         },
         {
             title: "Socials",
+            value: socials.length,
             icon: FaShareAlt,
             to: "/admin/socials",
-            gradient: "from-green-100 to-green-50",
         },
     ];
     return (

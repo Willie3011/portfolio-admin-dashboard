@@ -11,6 +11,7 @@ import UpdateProjectForm from "../components/UpdateProjectForm";
 import Loading from "../components/Loading";
 import Pagination from "../components/Pagination";
 import { useFetchProjects } from "../queries/queries";
+import Button from "../components/Button";
 
 
 
@@ -40,8 +41,8 @@ function ProjectsPage() {
     <section>
       {/* navigation top section*/}
       <div className="flex items-center justify-between mb-8 px-4">
-        <h2 className="font-bold leading-5 tracking-tight text-xl md:text-2xl lg:text-4xl dark:text-white text-gray-900">Projects</h2>
-        <button onClick={() => setAdding(true)} className="flex items-center px-5 py-3 shadow-xs rounded-lg bg-blue-500 text-white font-base hover:bg-blue-600 tracking-tight active:scale-95 transition duration-75 cursor-pointer"><FaPlus className="h-4 w-4 me-2" /> Add Project</button>
+        <h2 className="font-bold leading-5 text-xl md:text-2xl lg:text-4xl text-primary">Projects</h2>
+        <Button name="Add Project" icon={<FaPlus className="h-4 w-4 me-2" />} onClick={() => setAdding(true)} />
       </div>
 
       <Table

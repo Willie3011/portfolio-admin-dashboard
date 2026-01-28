@@ -1,16 +1,16 @@
 import { Link } from 'react-router-dom'
 
-function Card({title, icon: Icon, value, to, gradient}) {
+function Card({title, icon: Icon, value, to}) {
   return (
-      <Link to={to} className={`relative w-full overflow-hidden rounded-2xl p-6 bg-gradient-to-bg ${gradient} shadow-sm hover:shadow-lg transition group`}>
+      <Link to={to} className={`relative w-full overflow-hidden rounded-2xl p-6 border border-primary/10 hover:bg-primary/10 shadow-sm hover:shadow-lg transition group`}>
           {/* Icon */}
           <div className="w-10 h-10 rounded-lg bg-white/80 flex items-center justify-center">
-              <Icon className="text-gray-700 w-5 h-5"/>
+              <Icon className="text-accent w-5 h-5"/>
           </div>
 
           {/* Text */}
           <div className="mt-6">
-              <p className='text-sm text-gray-600'>{title}</p>
+              <p className='text-lg text-primary'>{title}</p>
               {value && (
                   <p className='text-3xl font-bold text-gray-800 mt-1'>{ value }</p>
               )}

@@ -3,17 +3,17 @@ import { FaChevronDown } from "react-icons/fa";
 
 function Table({ columns, data, onEdit, onDelete, renderCell }) {
     return (
-        <section className="relative overflow-x-auto bg-white dark:bg-gray-800 shadow-xs rounded-lg border border-gray-200 dark:border-gray-600">
+        <section className="relative overflow-x-auto bg-secondary shadow-xs rounded-lg border border-primary/40">
             {/* Header */}
             <div className="p-4 flex items-center justify-between space-x-4">
                 <div className="relative">
                     <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                         <CiSearch className="w-4 h-4 text-gray-400" />
                     </div>
-                    <input type="text" className="block w-full max-w-96 ps-9 pe-3 py-2 bg-gray-50 dark:bg-gray-800 border border-gray-100 dark:border-gray-600 rounded-lg text-sm focus:outline-none focus:border-blue-300 shadow-xs placeholder:text-gray-700 dark:placeholder:text-gray-400 dark:text-white" placeholder="Search..." />
+                    <input type="text" className="block w-full max-w-96 ps-9 pe-3 py-2 bg-secondary border border-primary/40 rounded-lg text-sm focus:outline-none focus:border-accent shadow-xs placeholder:text-gray-700" placeholder="Search..." />
                 </div>
 
-                <button className="flex items-center bg-gray-100 border border-gray-200 dark:border-gray-600 dark:bg-gray-800 px-3 py-2 rounded-lg text-sm dark:text-white">
+                <button className="flex items-center bg-secondary border border-primary/40 px-3 py-2 rounded-lg text-sm text-primary">
                     <CiFilter className="mr-2"/>
                     Filter
                     <FaChevronDown className="ml-2"/>
@@ -21,20 +21,20 @@ function Table({ columns, data, onEdit, onDelete, renderCell }) {
             </div>
 
             <table className="w-full text-sm text-left rtl:text-right">
-                <thead className="text-sm bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-600 dark:text-white rounded-lg">
+                <thead className="text-sm bg-secondary border-b border-primary/40 rounded-lg">
                     <tr>
                         {columns.map(col => (
-                            <th key={col.key} scope="col" className="px-6 py-3 font-medium">
+                            <th key={col.key} scope="col" className="px-6 py-3 text-primary">
                                 {col.label}
                             </th>
                         ))}
-                        <th className="px-6 py-3 font-medium">Action</th>
+                        <th className="px-6 py-3">Action</th>
                     </tr>
                 </thead>
 
                 <tbody>
                     {data.map(row => (
-                        <tr key={row._id} className="odd:bg-gray-50 dark:odd:bg-gray-800 even:bg-gray-100 dark:even:bg-gray-900 border-b border-gray-200 dark:border-gray-600 dark:text-white">
+                        <tr key={row._id} className="odd:bg-secondary  even:bg-primary/10  border-b border-primary/40 text-primary">
                             {
                                 columns.map(col => (
                                     <td key={col.key} className="px-6 py-4 max-w-100">

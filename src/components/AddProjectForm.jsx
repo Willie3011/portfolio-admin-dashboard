@@ -4,6 +4,8 @@ import ImageUpload from "./ImageUpload";
 import { toast } from "react-toastify";
 import { uploadToImageKit } from "../utils/imagekitUpload";
 import { useAddProjectMutation, useUpdateProjectMutation } from "../queries/mutations";
+import Input from "./Input";
+import Textarea from "./Textarea";
 
 const options = [
     { value: "html", label: "HTML" },
@@ -98,32 +100,44 @@ function AddProjectForm({ onClose }) {
     return (
         <form onSubmit={handleSubmit}>
             <div className="grid gap-4 mb-4 sm:grid-cols-2 overflow-y-auto">
-                <div>
-                    <label htmlFor="title" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Project title</label>
-                    <input type="text" name="title" id="title" value={formData.title} onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder:text-gray-400 dark:text-white" placeholder="Project title" />
-                </div>
-                <div>
-                    <label htmlFor="shortDesc" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Short description</label>
-                    <textarea name="shortDesc" id="shortDesc" value={formData.shortDesc} onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder:text-gray-400 dark:text-white resize-none" placeholder="Short description" />
-                </div>
-                <div>
-                    <label htmlFor="projectLink" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Live Link</label>
-                    <input type="text" name="projectLink" id="projectLink" value={formData.projectLink} onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder:text-gray-400 dark:text-white" placeholder="Live Link" />
-                </div>
-                <div>
-                    <label htmlFor="githubLink" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Github Link</label>
-                    <input type="text" name="githubLink" id="githubLink" value={formData.githubLink} onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder:text-gray-400 dark:text-white" placeholder="Github link" />
+                <Input
+                    label="Title"
+                    name="title"
+                    value={formData.title}
+                    onChange={handleChange}
+                />
+                <Textarea
+                    label="Short Description"
+                    name="shortDesc"
+                    value={formData.shortDesc}
+                    onChange={handleChange}
+                />
+                <Input
+                    label="Live Link"
+                    name="projectLink"
+                    value={formData.projectLink}
+                    onChange={handleChange}
+                />
+                <Input
+                    label="Github Link"
+                    name="githubLink"
+                    value={formData.githubLink}
+                    onChange={handleChange}
+                />
+                <div className="sm:col-span-2">
+                    <label htmlFor="techStack" className="block mb-2 text-sm font-semibold text-primary">Tech stack</label>
+                    <Select name="techStack" id="techStack" isMulti options={options} value={formData.techStack} onChange={handleSelectChange} classNames="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none block w-full p-2.5" styles={{ control: (base) => ({ ...base, backgroundColor: "transparent" }) }} />
                 </div>
                 <div className="sm:col-span-2">
-                    <label htmlFor="techStack" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tech stack</label>
-                    <Select name="techStack" id="techStack" isMulti options={options} value={formData.techStack} onChange={handleSelectChange} classNames="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder:text-gray-400 dark:text-white" styles={{ control: (base) => ({ ...base, backgroundColor: "transparent" }) }} />
+                    <Textarea
+                        label="Description"
+                        name="desc"
+                        value={formData.desc}
+                        onChange={handleChange}
+                    />
                 </div>
                 <div className="sm:col-span-2">
-                    <label htmlFor="desc" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-                    <textarea name="desc" id="desc" rows="4" value={formData.desc} onChange={handleChange} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white focus:outline-none" placeholder="Write project description..."></textarea>
-                </div>
-                <div className="sm:col-span-2">
-                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Project image</label>
+                    <label className="block mb-2 text-sm font-semibold text-primary">Project image</label>
                     <ImageUpload onChange={setImageFile} value={imageFile} />
                 </div>
             </div>
@@ -156,12 +170,12 @@ function AddProjectForm({ onClose }) {
                     type="button"
                     onClick={() => onClose(false)}
                     disabled={isLoading}
-                    className="px-4 py-2 border border-gray-400 rounded-lg text-gray-300 hover:bg-gray-800 disabled:opacity-50"
+                    className="px-6 py-3 border border-primary/80 rounded-lg text-primary hover:bg-primary/10 disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
                 >Cancel</button>
                 <button
                     type="submit"
                     disabled={isLoading}
-                    className="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 transition duration-75 cursor-pointer active:scale-95">{isLoading ? "Saving" : "Save Project"}</button>
+                    className="text-white inline-flex items-center bg-accent hover:bg-amber-400 font-medium rounded-lg text-sm px-6 py-3 text-center transition duration-300 cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed">{isLoading ? "Saving" : "Save Project"}</button>
             </div>
         </form>
     )
