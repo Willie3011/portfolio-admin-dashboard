@@ -6,6 +6,8 @@ import { toast } from "react-toastify";
 import ImageUpload from "./ImageUpload";
 import { uploadToImageKit } from "../utils/imagekitUpload";
 import { useUpdateProjectMutation } from "../queries/mutations";
+import Textarea from "./Textarea";
+import Input from "./Input";
 
 const TECH_OPTIONS = [
     { value: "html", label: "HTML" },
@@ -228,42 +230,15 @@ function UpdateProjectForm({ project, onClose }) {
                     type="button"
                     onClick={() => onClose(false)}
                     disabled={isLoading}
-                    className="px-5 py-2.5 border border-gray-400 rounded-lg text-gray-300 hover:bg-gray-600 transition duration-75 disabled:opacity-50 active:scale-95 cursor-pointer"
-                >
-                    Cancel
-                </button>
-
+                    className="px-6 py-3 border border-primary/80 rounded-lg text-primary hover:bg-primary/10 disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
+                >Cancel</button>
                 <button
                     type="submit"
                     disabled={isLoading}
-                    className="px-5 py-2.5 bg-blue-700 hover:bg-blue-800 text-white rounded-lg inline-flex items-center font-medium dark:bg-blue-600 dark:hover:bg-blue-700 transition duration-75 cursor-pointer active:scale-95 disabled:bg-gray-400 disabled:cursor-not-allowed"
-                >
-                    {isLoading ? "Updating..." : "Update Project"}
-                </button>
+                    className="text-white inline-flex items-center bg-accent hover:bg-amber-400 font-medium rounded-lg text-sm px-6 py-3 text-center transition duration-300 cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed">{isLoading ? "Updating..." : "Update Project"}</button>
             </div>
         </form>
     );
 }
-
-/* Small reusable inputs (optional but clean) */
-const Input = ({ label, ...props }) => (
-    <div>
-        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{label}</label>
-        <input
-            {...props}
-            className="w-full p-2.5 rounded-lg bg-gray-700 text-white"
-        />
-    </div>
-);
-
-const Textarea = ({ label, ...props }) => (
-    <div>
-        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{label}</label>
-        <textarea
-            {...props}
-            className="w-full p-2.5 rounded-lg bg-gray-700 text-white resize-none"
-        />
-    </div>
-);
 
 export default UpdateProjectForm;

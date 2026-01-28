@@ -39,7 +39,7 @@ function ImageUpload({ value, onChange }) {
     return (
         <div>
             <div
-                className={`border-2 border-dashed rounded-xl p-6 flex flex-col items-center justify-center cursor-pointer transition ${dragging ? "border-blue-500 bg-blue-500/10" : "border-gray-600 bg-gray-800"}`}
+                className={`border-2 border-dashed rounded-xl p-6 flex flex-col items-center justify-center cursor-pointer transition ${dragging ? "border-accent/50 bg-accent/10" : "border-primary/40 bg-secondary"}`}
                 onClick={() => inputRef.current.click()}
                 onDragOver={(e) => {
                     e.preventDefault();

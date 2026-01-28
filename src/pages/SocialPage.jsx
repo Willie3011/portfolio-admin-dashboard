@@ -7,6 +7,7 @@ import AddSocialForm from '../components/AddSocialForm';
 import UpdateSocialForm from '../components/UpdateSocialForm';
 import DeleteSocialForm from '../components/DeleteSocialForm';
 import { useFetchSocials } from '../queries/queries';
+import Button from '../components/Button';
 
 
 function SocialPage() {
@@ -27,11 +28,8 @@ function SocialPage() {
   return (
     <section>
       <div className="flex items-center justify-between mb-8 px-4">
-        <h2 className="font-bold leading-5 tracking-tight text-xl md:text-2xl lg:text-4xl dark:text-white text-gray-900">My Social Links</h2>
-        <button onClick={() => setOpenAddModal(true)} className="flex items-center px-5 py-3 shadow-xs rounded-lg bg-blue-500 text-white font-base hover:bg-blue-600 tracking-tight active:scale-95 transition duration-75 cursor-pointer">
-          Add Social Link
-          <FaPlus className="h-4 w-4 ml-2" />
-        </button>
+        <h2 className="font-bold leading-5 tracking-tight text-xl md:text-2xl lg:text-4xl text-primary">My Social Links</h2>
+        <Button name="Add Social Link" icon={<FaPlus className="h-4 w-4 me-2" />} onClick={() => setOpenAddModal(true)}/>
       </div>
       <Table
         columns={columns}

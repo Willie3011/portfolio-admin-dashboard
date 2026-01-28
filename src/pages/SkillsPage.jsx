@@ -10,6 +10,7 @@ import AddSkillForm from '../components/AddSkillForm';
 import UpdateSkillForm from '../components/UpdateSkillForm';
 import DeleteSkillForm from '../components/DeleteSkillForm';
 import { useFecthSkills } from '../queries/queries';
+import Button from '../components/Button';
 
 const fetchSkills = async () => {
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/skills`);
@@ -33,11 +34,9 @@ function SkillsPage() {
   return (
     <section>
       <div className="flex items-center justify-between mb-8 px-4">
-        <h2 className="font-bold leading-5 tracking-tight text-xl md:text-2xl lg:text-4xl dark:text-white text-gray-900">Skills</h2>
-        <button onClick={() => setOpenAddModal(true)} className="flex items-center px-5 py-3 shadow-xs rounded-lg bg-blue-500 text-white font-base hover:bg-blue-600 tracking-tight active:scale-95 transition duration-75 cursor-pointer">
-          Add Skill
-          <FaPlus className="h-4 w-4 ml-2" />
-        </button>
+        <h2 className="font-bold leading-5 text-xl md:text-2xl lg:text-4xl text-primary">Skills</h2>
+        <Button name="Add Skill" icon={<FaPlus className="h-4 w-4 me-2" />} onClick={() => setOpenAddModal(true)}/>
+        
       </div>
       <Table
         columns={columns}
