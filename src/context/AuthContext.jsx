@@ -32,17 +32,23 @@ export const AuthProvider = ({ children }) => {
 
     const login = async (email, password) => {
         try {
-            const response = axios.post(`${import.meta.env.VITE_API_URL}/users/login`, { email, password }, { withCredentials: true });
+            const response = await axios.post(
+                `${import.meta.env.VITE_API_URL}/users/login`,
+                { email, password },
+                { withCredentials: true }
+            );
+
             setUser(response.data.user);
             setIsAuthenticated(true);
-            return { success: true };
+
+            return response.data.user; // or response.data
         } catch (error) {
-            return {
-                success: false,
-                error: error.response?.data?.error || "Login failed"
-            }
+            throw new Error(
+                error.response?.data?.error || "Login failed"
+            );
         }
-    }
+    };
+
 
     const logout = async () => {
         await axios.post(`${import.meta.env.VITE_API_URL}/users/logout`, {}, { withCredentials: true });

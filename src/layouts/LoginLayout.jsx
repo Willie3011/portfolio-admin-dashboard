@@ -3,7 +3,7 @@ import LoginPage from '../pages/LoginPage'
 
 function LoginLayout() {
   return (
-      <main className=''>
+      <main className='font-Poppins'>
         <LoginPage/>
     </main>
   )
