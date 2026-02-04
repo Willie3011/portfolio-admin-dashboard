@@ -1,13 +1,11 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
 import { useEffect, useMemo, useState } from "react";
 import Select from "react-select";
-import { toast } from "react-toastify";
 import ImageUpload from "./ImageUpload";
 import { uploadToImageKit } from "../utils/imagekitUpload";
 import { useUpdateProjectMutation } from "../queries/mutations";
 import Textarea from "./Textarea";
 import Input from "./Input";
+import RichTextArea from "./RichTextArea";
 
 const TECH_OPTIONS = [
     { value: "html", label: "HTML" },
@@ -24,7 +22,6 @@ const TECH_OPTIONS = [
 ];
 
 function UpdateProjectForm({ project, onClose }) {
-    const queryClient = useQueryClient();
     const [formData, setFormData] = useState({
         title: "",
         shortDesc: "",
@@ -33,7 +30,7 @@ function UpdateProjectForm({ project, onClose }) {
         githubLink: "",
         techStack: [],
     });
-
+    const [desc, setDesc] = useState("");
     const [imageFile, setImageFile] = useState(null);
     const [error, setError] = useState(null);
     const [progress, setProgress] = useState(0);
@@ -45,11 +42,11 @@ function UpdateProjectForm({ project, onClose }) {
         setFormData({
             title: project.title || "",
             shortDesc: project.shortDesc || "",
-            desc: project.desc || "",
             liveLink: project.projectLink || "",
             githubLink: project.githubLink || "",
             techStack: project.techStack || [],
         });
+        setDesc(project.desc || "")
     }, [project]);
 
     /* Convert techStack → react-select format */
@@ -62,24 +59,7 @@ function UpdateProjectForm({ project, onClose }) {
     );
 
     const updateMutation = useUpdateProjectMutation(onClose);
-    //     useMutation({
-    //     mutationFn: async ({ id, updates }) => {
-    //         const res = await axios.patch(
-    //             `${import.meta.env.VITE_API_URL}/projects/${id}`,
-    //             updates,
-    //             { withCredentials: true }
-    //         );
-    //         return res.data;
-    //     },
-    //     onSuccess: () => {
-    //         toast.success("Project updated successfully");
-    //         queryClient.invalidateQueries({ queryKey: ["projects"] });
-    //         onClose(false);
-    //     },
-    //     onError: (err) => {
-    //         setError(err)
-    //     },
-    // });
+  
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -118,6 +98,10 @@ function UpdateProjectForm({ project, onClose }) {
                 }
             }
 
+            if (desc !== "") {
+                formData.desc = desc;
+            }
+
             updateMutation.mutate({
                 id: project._id,
                 updates: {
@@ -145,7 +129,6 @@ function UpdateProjectForm({ project, onClose }) {
                     label="Project Title"
                     name="title"
                     value={formData.title}
-                    
                     onChange={handleChange}
                 />
                 <Textarea
@@ -181,13 +164,8 @@ function UpdateProjectForm({ project, onClose }) {
 
 
                 <div className="sm:col-span-2">
-                    <Textarea
-                        label="Description"
-                        name="desc"
-                        rows={4}
-                        value={formData.desc}
-                        onChange={handleChange}
-                    />
+                    <label htmlFor="techStack" className="block mb-2 text-sm font-semibold text-primary">Description</label>
+                    <RichTextArea value={desc} setValue={setDesc}/>
                 </div>
 
                 <div className="sm:col-span-2">

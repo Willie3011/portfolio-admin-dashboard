@@ -15,7 +15,7 @@ function Modal({ isOpen, onClose, title, children }) {
                     {/* Header */}
                     <div className="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5">
                         <h3 className='text-lg font-semibold text-primary'>{title}</h3>
-                        <button onClick={() => onClose(false)} className='text-gray bg-transparent hover:bg-accent/20 hover:text-primary rounded-lg text-sm p-1.5 ml-auto inline-flex items-center'>
+                        <button onClick={() => onClose(false)} className='text-gray bg-transparent hover:bg-accent/20 hover:text-primary rounded-lg text-sm p-1.5 ml-auto inline-flex items-center cursor-pointer'>
                             <IoMdClose className="w-5 h-5" />
                             <span className="sr-only">Close Modal</span>
                         </button>

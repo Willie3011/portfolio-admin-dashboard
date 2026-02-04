@@ -6,6 +6,7 @@ import { uploadToImageKit } from "../utils/imagekitUpload";
 import { useAddProjectMutation, useUpdateProjectMutation } from "../queries/mutations";
 import Input from "./Input";
 import Textarea from "./Textarea";
+import RichTextArea from "./RichTextArea";
 
 const options = [
     { value: "html", label: "HTML" },
@@ -25,11 +26,11 @@ function AddProjectForm({ onClose }) {
     const [formData, setFormData] = useState({
         title: "",
         shortDesc: "",
-        desc: "",
         techStack: [],
         projectLink: "",
         githubLink: ""
     })
+    const [desc, setDesc] = useState("");
     const [imageFile, setImageFile] = useState(null);
     const [uploadProgress, setUploadProgress] = useState(0);
 
@@ -59,6 +60,7 @@ function AddProjectForm({ onClose }) {
         try {
             const projectData = {
                 ...formData,
+                desc,
                 techStack: formData.techStack.map(option => option.value),
                 image: null
             };
@@ -129,12 +131,8 @@ function AddProjectForm({ onClose }) {
                     <Select name="techStack" id="techStack" isMulti options={options} value={formData.techStack} onChange={handleSelectChange} classNames="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none block w-full p-2.5" styles={{ control: (base) => ({ ...base, backgroundColor: "transparent" }) }} />
                 </div>
                 <div className="sm:col-span-2">
-                    <Textarea
-                        label="Description"
-                        name="desc"
-                        value={formData.desc}
-                        onChange={handleChange}
-                    />
+                    <label htmlFor="techStack" className="block mb-2 text-sm font-semibold text-primary">Description</label>
+                    <RichTextArea value={desc} setValue={setDesc}/>
                 </div>
                 <div className="sm:col-span-2">
                     <label className="block mb-2 text-sm font-semibold text-primary">Project image</label>
