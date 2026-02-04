@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { addProject, addSkill, addSocial, deleteProject, deleteSkill, deleteSocial, updateProject, updateSkill, updateSocial } from "../api/portfolio.api";
+import { addProject, addSkill, addSocial, deleteProject, deleteSkill, deleteSocial, toggleFeatureProject, updateProject, updateSkill, updateSocial } from "../api/portfolio.api";
 import { toast } from "react-toastify";
 
 //Create Project
@@ -151,3 +151,17 @@ export const useDeleteSocialMutation = (onClose) => {
         }
     })
 }
+
+// Update Featured Project
+export const useUpdateFeatureMutaion = () => {
+    const queryClient = useQueryClient();
+    
+    return useMutation({
+        mutationFn: async (id) => {
+            await toggleFeatureProject(id)
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["projects"]})
+        }
+    })
+} 

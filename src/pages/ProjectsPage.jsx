@@ -1,8 +1,5 @@
 import { FaPlus, FaSearch } from "react-icons/fa";
-import axios from "axios";
 import Table from "../components/Table";
-import { useQuery } from "@tanstack/react-query";
-import { CiStar } from "react-icons/ci";
 import Modal from "../components/Modal";
 import { useState } from "react";
 import AddProjectForm from "../components/AddProjectForm";
@@ -12,7 +9,7 @@ import Loading from "../components/Loading";
 import Pagination from "../components/Pagination";
 import { useFetchProjects } from "../queries/queries";
 import Button from "../components/Button";
-
+import { useUpdateFeatureMutaion } from "../queries/mutations";
 
 
 function ProjectsPage() {
@@ -23,7 +20,8 @@ function ProjectsPage() {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
 
-  const { data = [], isPending, error } = useFetchProjects(page, limit)
+  const { data = [], isPending, error } = useFetchProjects(page, limit);
+  const updateFeatureMutation = useUpdateFeatureMutaion();
 
   const { data: projects, pagination } = data;
 
@@ -36,6 +34,10 @@ function ProjectsPage() {
     { key: "projectLink", label: "Live Link" },
     { key: "featured", label: "Featured" }
   ];
+
+  const handleFeature = async (id) => {
+    updateFeatureMutation.mutate(id);
+  }
 
   return (
     <section>
@@ -56,17 +58,7 @@ function ProjectsPage() {
           setDeleting(true);
           setProject(project);
         }}
-        renderCell={(key, row) => {
-          if (key === "featured") {
-            return (
-              <button>
-                <CiStar className={row.featured ? "text-yellow-400" : ""} />
-              </button>
-            );
-          }
-          
-          return row[key];
-        }}
+        handleFeature={handleFeature}
       />
       <Pagination
         page={pagination.page}

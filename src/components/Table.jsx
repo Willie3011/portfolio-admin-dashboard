@@ -1,7 +1,8 @@
-import { CiSearch, CiFilter } from "react-icons/ci";
+import { CiSearch, CiFilter, CiStar } from "react-icons/ci";
+import { FaRegStar, FaStar  } from "react-icons/fa";
 import { FaChevronDown } from "react-icons/fa";
 
-function Table({ columns, data, onEdit, onDelete, renderCell }) {
+function Table({ columns, data, onEdit, onDelete, handleFeature }) {
     return (
         <section className="relative overflow-x-auto bg-secondary shadow-xs rounded-lg border border-primary/40">
             {/* Header */}
@@ -14,9 +15,9 @@ function Table({ columns, data, onEdit, onDelete, renderCell }) {
                 </div>
 
                 <button className="flex items-center bg-secondary border border-primary/40 px-3 py-2 rounded-lg text-sm text-primary">
-                    <CiFilter className="mr-2"/>
+                    <CiFilter className="mr-2" />
                     Filter
-                    <FaChevronDown className="ml-2"/>
+                    <FaChevronDown className="ml-2" />
                 </button>
             </div>
 
@@ -38,7 +39,9 @@ function Table({ columns, data, onEdit, onDelete, renderCell }) {
                             {
                                 columns.map(col => (
                                     <td key={col.key} className="px-6 py-4 max-w-100">
-                                        {renderCell ? renderCell(col.key, row) : row[col.key]}
+                                        {col.key === "featured" ? <button onClick={() => handleFeature(row._id)}>
+                                            {row.featured ? <FaStar className="text-accent"/> : <FaRegStar />}
+                                        </button> : row[col.key]}
                                     </td>
                                 ))
                             }

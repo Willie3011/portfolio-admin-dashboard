@@ -74,3 +74,7 @@ export const deleteSocial = async (id) => {
     return response.data.data
 }
 
+export const toggleFeatureProject = async (projectId) => {
+    const { data } = await api.patch(`/projects/${projectId}/feature`)
+    return data
+}
