@@ -21,7 +21,7 @@ const TECH_OPTIONS = [
     { value: "node", label: "Node Js" },
 ];
 
-function UpdateProjectForm({ project, onClose }) {
+function UpdateProjectForm({ project, onClose, options }) {
     const [formData, setFormData] = useState({
         title: "",
         shortDesc: "",
@@ -52,7 +52,7 @@ function UpdateProjectForm({ project, onClose }) {
     /* Convert techStack → react-select format */
     const selectedTech = useMemo(
         () =>
-            TECH_OPTIONS.filter(option =>
+            options.filter(option =>
                 formData.techStack.includes(option.value)
             ),
         [formData.techStack]
@@ -156,7 +156,7 @@ function UpdateProjectForm({ project, onClose }) {
                     <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tech Stack</label>
                     <Select
                         isMulti
-                        options={TECH_OPTIONS}
+                        options={options}
                         value={selectedTech}
                         onChange={handleTechChange}
                     />

@@ -11,6 +11,23 @@ import { useFetchProjects } from "../queries/queries";
 import Button from "../components/Button";
 import { useUpdateFeatureMutaion } from "../queries/mutations";
 
+// Select Options
+const options = [
+    { value: "html", label: "HTML" },
+    { value: "css", label: "CSS" },
+    { value: "tailwindcss", label: "Tailwind CSS" },
+    { value: "js", label: "JavaScript" },
+    { value: "python", label: "Python" },
+    { value: "csharp", label: "C#" },
+    { value: "java", label: "Java" },
+    { value: "react", label: "React Js" },
+    { value: "express", label: "Express Js" },
+    { value: "mongo", label: "Mongo DB" },
+    { value: "firebase", label: "Firebase DB" },
+    { value: "mongoose", label: "Mongoose" },
+    { value: "sql", label: "SQL" },
+    { value: "node", label: "Node Js" },
+]
 
 function ProjectsPage() {
   const [adding, setAdding] = useState(false);
@@ -71,9 +88,9 @@ function ProjectsPage() {
           setPage(1);
         }}
       />
-      <Modal isOpen={adding} onClose={setAdding} title="Add New Project" children={<AddProjectForm onClose={ setAdding } />}/>
+      <Modal isOpen={adding} onClose={setAdding} title="Add New Project" children={<AddProjectForm onClose={setAdding} options={options} />}/>
+      <Modal isOpen={updating} onClose={setUpdating} title="Update Project" children={<UpdateProjectForm project={project} setProject={setProject} onClose={setUpdating} options={options} />}/>
       <Modal isOpen={deleting} onClose={setDeleting} title="Confirm Project Deletion" children={<DeleteProjectForm project={project} setProject={ setProject } onClose={ setDeleting } />}/>
-      <Modal isOpen={updating} onClose={setUpdating} title="Update Project" children={<UpdateProjectForm project={project} setProject={ setProject } onClose={ setUpdating } />}/>
     </section>
   )
 }

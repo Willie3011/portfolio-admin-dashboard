@@ -8,21 +8,8 @@ import Input from "./Input";
 import Textarea from "./Textarea";
 import RichTextArea from "./RichTextArea";
 
-const options = [
-    { value: "html", label: "HTML" },
-    { value: "css", label: "CSS" },
-    { value: "js", label: "JavaScript" },
-    { value: "python", label: "Python" },
-    { value: "csharp", label: "C#" },
-    { value: "java", label: "Java" },
-    { value: "react", label: "React Js" },
-    { value: "express", label: "Express Js" },
-    { value: "mongo", label: "Mongo DB" },
-    { value: "sql", label: "SQL" },
-    { value: "node", label: "Node Js" },
-]
 
-function AddProjectForm({ onClose }) {
+function AddProjectForm({ onClose, options }) {
     const [formData, setFormData] = useState({
         title: "",
         shortDesc: "",
