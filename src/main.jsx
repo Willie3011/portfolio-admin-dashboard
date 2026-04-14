@@ -4,7 +4,6 @@ import './index.css'
 import App from './App.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import MainLayout from './layouts/MainLayout.jsx'
-import Homepage from './pages/Homepage.jsx';
 import ProjectsPage from "./pages/ProjectsPage.jsx";
 import SkillsPage from "./pages/SkillsPage.jsx";
 import SocialPage from "./pages/SocialPage.jsx";
@@ -15,6 +14,7 @@ import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { AuthProvider } from './context/AuthContext.jsx'
 import ProtectedRoute from './routes/ProtectedRoute.jsx'
+import Overview from './pages/Overview.jsx'
 
 const queryClient = new QueryClient();
 
@@ -27,7 +27,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <Homepage />
+        element: <Overview />
       },
       {
         path: "projects",

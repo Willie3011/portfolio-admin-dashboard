@@ -6,6 +6,7 @@ function RichTextArea({ value, setValue }) {
     <ReactQuill
       value={value}
       onChange={setValue}
+      theme='snow'
     />
   )
 }

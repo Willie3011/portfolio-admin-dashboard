@@ -2,8 +2,6 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
 import RichTextArea from "./RichTextArea";
 
 const fetchAbout = async () => {
@@ -26,19 +24,19 @@ function AboutEditor() {
             toast.success("About Me Updated!")
         }
     })
-   
+
     useEffect(() => {
         if (data?.content) {
             setValue(data.content)
         }
     }, [data]);
-    
 
-    
+
+
     if (isPending) {
         return "Loading..."
     }
-    
+
     if (error) {
         return "something went wrong " + error.message
     }
@@ -49,11 +47,13 @@ function AboutEditor() {
         mutation.mutate(value);
     }
     return (
-        <div className="bg-white rounded-xl p-6 shadow col-span-12 lg:col-span-8 ">
-            <h2 className="text-xl font-semibold mb-4">About Me</h2>
+        <div className="flex flex-col">
             <RichTextArea value={value} setValue={setValue} />
 
-            <button onClick={save} className={`mt-4 ${mutation.isPending ? "bg-gray-500 hover:bg-gray-500 cursor-not-allowed" : "bg-blue-600"} hover:bg-blue-700 transition duration-75 text-white px-4 py-2 rounded-lg cursor-pointer`} disabled={mutation.isPending}>Save</button>
+            <div className="flex items-center justify-between px-4 py-3 border-t border-[#1e1e1e] bg-[#111]">
+                <span className="text-sm text-slate-500">{value.length} characters</span>
+                <button onClick={save} className={`px-5 py-2 rounded-md border-none text-sm font-semibold text-[#0f0f0f] cursor-pointer transition-all duration-150 ${mutation.isPending ? "bg-gray-500 hover:bg-gray-500 cursor-not-allowed" : "bg-[#c9922a] hover:bg-[#e0a838] hover:-translate-y-px"}`} disabled={mutation.isPending}>Save</button>
+            </div>
 
         </div>
     )

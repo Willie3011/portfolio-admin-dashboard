@@ -1,24 +1,35 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom'
 
-function Card({title, icon: Icon, value, to}) {
-  return (
-      <Link to={to} className={`relative w-full overflow-hidden rounded-2xl p-6 border border-primary/10 hover:bg-primary/10 shadow-sm hover:shadow-lg transition group`}>
-          {/* Icon */}
-          <div className="w-10 h-10 rounded-lg bg-white/80 flex items-center justify-center">
-              <Icon className="text-accent w-5 h-5"/>
-          </div>
+function Card({ stat }) {
+const [hovered, setHovered] = useState(false);
+    return (
+        <Link
+            to={stat.to}
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
+            className={`relative overflow-hidden cursor-pointer bg-[#161616] border rounded-xl p-5 transition-all duration-150 ${hovered ? "border-yellow-600/30 -translate-y-px" : "border-[#222] translate-y-0"}`}
+        >
+            {/* accent bar */}
+            <div className={`absolute top-0 left-0 right-0 h-0.5 bg-[#c9922a] transition-opacity duration-200 ${hovered ? "opacity-100" : "opacity-0"}`} />
 
-          {/* Text */}
-          <div className="mt-6">
-              <p className='text-lg text-primary'>{title}</p>
-              {value && (
-                  <p className='text-3xl font-bold text-gray-800 mt-1'>{ value }</p>
-              )}
-          </div>
+            {/* Icon + Badge row*/}
+            <div className="flex items-center justify-between mb-4">
+                <div className="w-9 h-9 rounded-lg bg-[#1e1a14] border border-[#2e2510] flex items-center justify-center">
+                    {stat.icon}
+                </div>
+                <span className="text-[10px] px-2 py-0.75 rounded-full bg-[#1a2218] text-[#5a9e47] border-[#2a3a26]">
+                    {stat.badge}
+                </span>
+            </div>
 
-          <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition"></div>
-      </Link>
-  )
+            <div className="text-4xl font-bold text-[#e8e2d4] tracking-[-1px] leading-none">
+                {stat.value}
+            </div>
+            <div className="text-sm text-[#555] mt-1.5">{stat.label}</div>
+        </Link>
+    )
 }
+
 
 export default Card
