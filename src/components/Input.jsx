@@ -1,15 +1,15 @@
 import React from 'react'
 
-function Input({label, ...props}) {
-  return (
-          <div>
-              <label className="block mb-2 text-sm font-semibold text-primary">{label}</label>
-              <input
-                  {...props}
-              className="w-full p-2.5 rounded-lg bg-secondary border text-gray-700 border-primary/40 focus:outline-none focus:border-accent/80 focus:ring-2 focus:ring-accent/20"
-              />
-          </div>
-  )
+function Input({ label, ...props }) {
+    return (
+        <div>
+            <label className="block mb-2 text-sm font-semibold text-[#888]">{label}</label>
+            <input
+                {...props}
+                className="w-full rounded-md border border-[#2a2a2a] bg-[#111] px-3 py-2 text-sm text-[#e8e2d4] outline-none transition-colors focus:border-[#c9922a55]"
+            />
+        </div>
+    )
 }
 
 export default Input

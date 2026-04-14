@@ -7,3 +7,147 @@
     --color-accent:#e3b23c;
     --color-gray:#6e675f;
 }
+
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;  
+  scrollbar-width: none;     
+}
+
+.quill > * {
+  border-color: inherit !important;
+  background: inherit !important;
+  color: inherit !important;
+}
+
+/* RichTextEditor.css */
+
+/* Editor container */
+.quill {
+  background: #141414;
+  border-radius: 12px;
+  border: 0.5px solid #222;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.quill:focus-within {
+  border-color: #c9922a55;
+}
+
+/* Toolbar */
+.ql-toolbar.ql-snow {
+  border: none;
+  border-bottom: 0.5px solid #1e1e1e;
+  background: #111;
+  padding: 10px 14px;
+  font-family: 'DM Sans', sans-serif;
+}
+
+/* Toolbar buttons and dropdowns */
+.ql-toolbar.ql-snow .ql-picker-label {
+  color: #888;
+  border-color: #2a2a2a;
+  background: transparent;
+}
+
+.ql-toolbar.ql-snow .ql-picker-label:hover {
+  color: #c9922a;
+}
+
+.ql-toolbar.ql-snow .ql-picker-item {
+  color: #e8e2d4;
+  background: #161616;
+}
+
+.ql-toolbar.ql-snow .ql-picker-item:hover {
+  color: #c9922a;
+  background: #1e1a14;
+}
+
+.ql-toolbar.ql-snow button {
+  color: #888;
+}
+
+.ql-toolbar.ql-snow button:hover {
+  color: #c9922a;
+}
+
+.ql-toolbar.ql-snow button.ql-active {
+  color: #c9922a;
+}
+
+/* Icons stroke/fill colors */
+.ql-snow .ql-stroke {
+  stroke: #888;
+}
+
+.ql-snow .ql-fill {
+  fill: #888;
+}
+
+.ql-snow button:hover .ql-stroke,
+.ql-snow button.ql-active .ql-stroke {
+  stroke: #c9922a;
+}
+
+.ql-snow button:hover .ql-fill,
+.ql-snow button.ql-active .ql-fill {
+  fill: #c9922a;
+}
+
+/* Dropdown menu */
+.ql-snow .ql-picker-options {
+  background: #161616;
+  border: 0.5px solid #2a2a2a;
+  border-radius: 8px;
+}
+
+/* Editor content area */
+.ql-container.ql-snow {
+  border: none;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13.5px;
+  line-height: 1.75;
+}
+
+.ql-editor {
+  min-height: 180px;
+  padding: 20px 22px;
+  color: #9a9487;
+  background: #141414;
+}
+
+.ql-editor.ql-blank::before {
+  color: #555;
+  font-style: normal;
+  font-family: 'DM Sans', sans-serif;
+}
+
+/* Links inside editor */
+.ql-editor a {
+  color: #c9922a;
+  text-decoration: underline;
+}
+
+/* Code blocks */
+.ql-editor pre.ql-syntax {
+  background: #0a0a0a;
+  border-radius: 8px;
+  color: #e8e2d4;
+}
+
+/* Selection */
+.ql-editor ::selection {
+  background: #c9922a55;
+}
+
+/* Placeholder */
+.ql-editor.ql-blank::before {
+  color: #555;
+  font-style: normal;
+}

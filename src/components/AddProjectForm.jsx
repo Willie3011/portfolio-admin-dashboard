@@ -7,6 +7,8 @@ import { useAddProjectMutation, useUpdateProjectMutation } from "../queries/muta
 import Input from "./Input";
 import Textarea from "./Textarea";
 import RichTextArea from "./RichTextArea";
+import ReactSelect from "./ReactSelect";
+
 
 
 function AddProjectForm({ onClose, options }) {
@@ -88,7 +90,7 @@ function AddProjectForm({ onClose, options }) {
 
     return (
         <form onSubmit={handleSubmit}>
-            <div className="grid gap-4 mb-4 sm:grid-cols-2 overflow-y-auto">
+            <div className="grid gap-4 mb-4 sm:grid-cols-2 overflow-y-auto no-scrollbar">
                 <Input
                     label="Title"
                     name="title"
@@ -114,15 +116,22 @@ function AddProjectForm({ onClose, options }) {
                     onChange={handleChange}
                 />
                 <div className="sm:col-span-2">
-                    <label htmlFor="techStack" className="block mb-2 text-sm font-semibold text-primary">Tech stack</label>
-                    <Select name="techStack" id="techStack" isMulti options={options} value={formData.techStack} onChange={handleSelectChange} classNames="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none block w-full p-2.5" styles={{ control: (base) => ({ ...base, backgroundColor: "transparent" }) }} />
+                    <label htmlFor="techStack" className="block mb-2 text-sm font-semibold text-[#888]">Tech stack</label>
+                    <ReactSelect
+                        name="techStack"
+                        id="techStack"
+                        isMulti
+                        options={options}
+                        value={formData.techStack}
+                        onChange={handleSelectChange}
+                    />
                 </div>
                 <div className="sm:col-span-2">
-                    <label htmlFor="techStack" className="block mb-2 text-sm font-semibold text-primary">Description</label>
+                    <label htmlFor="techStack" className="block mb-2 text-sm font-semibold text-[#888]">Description</label>
                     <RichTextArea value={desc} setValue={setDesc}/>
                 </div>
                 <div className="sm:col-span-2">
-                    <label className="block mb-2 text-sm font-semibold text-primary">Project image</label>
+                    <label className="block mb-2 text-sm font-semibold text-[#888]">Project image</label>
                     <ImageUpload onChange={setImageFile} value={imageFile} />
                 </div>
             </div>
@@ -155,12 +164,12 @@ function AddProjectForm({ onClose, options }) {
                     type="button"
                     onClick={() => onClose(false)}
                     disabled={isLoading}
-                    className="px-6 py-3 border border-primary/80 rounded-lg text-primary hover:bg-primary/10 disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
+                    className="px-4.5 py-2.5 border border-[#2a2a2a] rounded-md text-[#888] hover:bg-[#111] disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
                 >Cancel</button>
                 <button
                     type="submit"
                     disabled={isLoading}
-                    className="text-white inline-flex items-center bg-accent hover:bg-amber-400 font-medium rounded-lg text-sm px-6 py-3 text-center transition duration-300 cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed">{isLoading ? "Saving" : "Save Project"}</button>
+                    className="text-white inline-flex items-center bg-[#c9922a] hover:bg-[#b87d1d] font-medium rounded-md text-sm px-4.5 py-2.5 text-center transition duration-300 cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed">{isLoading ? "Adding" : "Add Project"}</button>
             </div>
         </form>
     )

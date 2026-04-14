@@ -7,7 +7,7 @@ function MainLayout() {
     <div className="font-Poppins flex overflow-hidden">
       <Sidebar />
       {/* <Sidebar open={openSidebar} setOpen={setOpenSidebar} /> */}
-      <main className="bg-[#0f0f0f] h-screen overflow-y-auto">
+      <main className="bg-[#0f0f0f] h-screen w-full overflow-y-auto">
         <Outlet />
       </main>
 

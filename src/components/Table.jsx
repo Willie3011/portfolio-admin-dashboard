@@ -4,7 +4,7 @@ import { FaChevronDown } from "react-icons/fa";
 
 function Table({ columns, data, onEdit, onDelete, handleFeature }) {
     return (
-        <section className="relative overflow-x-auto bg-secondary shadow-xs rounded-lg border border-primary/40">
+        <section className="relative overflow-x-auto bg-secondary shadow-xs rounded-lg border border-primary/40 ">
             {/* Header */}
             <div className="p-4 flex items-center justify-between space-x-4">
                 <div className="relative">

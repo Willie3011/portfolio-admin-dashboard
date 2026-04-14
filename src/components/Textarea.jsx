@@ -3,10 +3,10 @@ import React from 'react'
 function Textarea({ label, ...props }) {
     return (
         <div>
-            <label className="block mb-2 text-sm font-semibold text-primary">{label}</label>
+            <label className="block mb-2 text-sm font-semibold text-[#888]">{label}</label>
             <textarea
                 {...props}
-                className="w-full p-2.5 rounded-lg text-gray-700 border border-primary/40 focus:outline-none focus:border-accent/80 focus:ring-2 focus:ring-accent/20 resize-none"
+                className="min-h-20 w-full rounded-md border border-[#2a2a2a] bg-[#111] px-3 py-2 text-sm text-[#e8e2d4] outline-none transition-colors focus:border-[#c9922a55] no-scrollbar"
             />
         </div>
     )

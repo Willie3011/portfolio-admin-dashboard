@@ -6,6 +6,7 @@ import { useUpdateProjectMutation } from "../queries/mutations";
 import Textarea from "./Textarea";
 import Input from "./Input";
 import RichTextArea from "./RichTextArea";
+import ReactSelect from "./ReactSelect";
 
 const TECH_OPTIONS = [
     { value: "html", label: "HTML" },
@@ -122,7 +123,7 @@ function UpdateProjectForm({ project, onClose, options }) {
     const isLoading = updateMutation.isPending;
 
     return (
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4 overflow-y-auto no-scrollbar max-h-[75vh]">
             <div className="grid gap-4 sm:grid-cols-2">
 
                 <Input
@@ -154,7 +155,7 @@ function UpdateProjectForm({ project, onClose, options }) {
 
                 <div className="sm:col-span-2">
                     <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tech Stack</label>
-                    <Select
+                    <ReactSelect
                         isMulti
                         options={options}
                         value={selectedTech}
@@ -202,19 +203,19 @@ function UpdateProjectForm({ project, onClose, options }) {
                 )
             }
 
-
             <div className="flex justify-end gap-3 pt-4">
                 <button
                     type="button"
                     onClick={() => onClose(false)}
                     disabled={isLoading}
-                    className="px-6 py-3 border border-primary/80 rounded-lg text-primary hover:bg-primary/10 disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
+                    className="px-4.5 py-2.5 border border-[#2a2a2a] rounded-md text-[#888] hover:bg-[#111] disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
                 >Cancel</button>
                 <button
                     type="submit"
                     disabled={isLoading}
-                    className="text-white inline-flex items-center bg-accent hover:bg-amber-400 font-medium rounded-lg text-sm px-6 py-3 text-center transition duration-300 cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed">{isLoading ? "Updating..." : "Update Project"}</button>
+                    className="text-white inline-flex items-center bg-[#c9922a] hover:bg-[#b87d1d] font-medium rounded-md text-sm px-4.5 py-2.5 text-center transition duration-300 cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed">{isLoading ? "Updating..." : "Update Project"}</button>
             </div>
+            
         </form>
     );
 }
