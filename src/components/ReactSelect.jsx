@@ -20,6 +20,10 @@ const customSelectStyles = {
         borderRadius: "7px",
         zIndex: 60,
     }),
+    menuPortal: (base) => ({
+        ...base,
+        zIndex: 9999
+    }),
     option: (base, { isFocused, isSelected }) => ({
         ...base,
         background: isSelected
@@ -87,6 +91,7 @@ const ReactSelect = ({...props}) => {
       <Select
           {...props}
           styles={customSelectStyles}
+          menuPortalTarget={document.body}
           theme={(theme) => ({
               ...theme,
               colors: {

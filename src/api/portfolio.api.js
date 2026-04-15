@@ -60,7 +60,7 @@ export const fetchSocials = async () => {
 // Create skill
 export const addSocial = async (social) => {
     const { data } = await api.post('/socials', social);
-    return data.skill
+    return data.social
 }
 
 export const updateSocial = async (id, updates) => {
