@@ -92,7 +92,7 @@ function SocialPage() {
         {filteredSocials.length === 0 ? (
         <div className="flex h-50 items-center justify-center text-sm text-[#444]">No socials match your search</div>
         ) : (
-            <div className="grid grid-cols-2 gap-3.5">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
               {filteredSocials.map((social) => (
                 <SocialCard
                   key={social.id}
