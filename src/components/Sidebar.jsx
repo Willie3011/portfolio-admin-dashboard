@@ -53,7 +53,7 @@ const NAV_ITEMS = [
                     stroke="currentColor"
                     strokeWidth="1.1"
                     strokeLinecap="round"
-                />
+                    />
             </svg>
         )
     }
@@ -70,13 +70,13 @@ const UTILITY_ITEMS = [
                     stroke="currentColor"
                     strokeWidth="1.2"
                     strokeLinejoin="round"
-                />
+                    />
             </svg>
         )
     },
     {
         label: "Logout",
-        path: "/logout",
+        path: "/",
         icon: (
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                 <path d="M6 14H3a1 1 0 01-1-1V3a1 1 0 011-1h3" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
@@ -89,11 +89,11 @@ const UTILITY_ITEMS = [
 
 const Sidebar = () => {
     const [expanded, setExpanded] = useState(false);
-    const { logout } = useAuth();
     
     const navigate = useNavigate();
     const location = useLocation();
     const activePath = location.pathname;
+    const { logout } = useAuth();
 
     const handleNav = path => {
         nagivate(path);
@@ -119,7 +119,7 @@ const Sidebar = () => {
                             item={item}
                             active={activePath === item.path}
                             expanded={expanded}
-                            onClick={() => handleNav(item.path)}
+                            onClick={() => item.label === "Logout" ? logout() : handleNav(item.path)}
                         />
                     ))
                 }

@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom"
 import { useAuth } from "../context/AuthContext";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import Input from "../components/Input";
 
 function LoginPage() {
     const [formData, setFormData] = useState({
@@ -52,23 +53,24 @@ function LoginPage() {
 
 
     return (
-        <section className='w-full bg-secondary'>
+        <section className='w-full bg-[#0f0f0f]'>
             <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen lg:py-0">
-                <section className='w-full bg-white rounded-lg shadow-lg md:mt-0 sm:max-w-md xl:p-0'>
+                <section className='w-full bg-[#161616] text-[#e8e2d4] rounded-lg shadow-lg md:mt-0 sm:max-w-md xl:p-0'>
                     <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-                        <h1 className='text-xl font-bold md:text-3xl text-primary text-center'>
+                        <h1 className='text-xl font-bold md:text-3xl text-center'>
                             Login
                         </h1>
                         <form onSubmit={handleSubmit} className='space-y-4 md:space-y-6'>
                             <div>
-                                <label htmlFor="email" className='block mb-2 text-sm font-semibold text-primary'>Email</label>
-                                <input type="email" name='email' id='email' value={formData.email} onChange={handleChange} className='bg-gray-50 border border-primary/40 text-gray-900 text-sm rounded-lg focus:ring-accent/80 focus:border-accent/60 focus:outline-none block w-full p-2.5' required/>
+                                <label htmlFor="email" className='block mb-2 text-sm font-semibold'>Email</label>
+                                <Input type="email" name='email' id='email' value={formData.email} onChange={handleChange} required/>
                             </div>
                             <div>
-                                <label htmlFor="password" className='block mb-2 text-sm font-semibold text-primary'>Password</label>
-                                <input type="password" name='password' id='password' value={formData.password} onChange={handleChange} className='bg-gray-50 border border-primary/40 text-gray-900 text-sm rounded-lg focus:ring-accent/80 focus:border-accent/60 focus:outline-none block w-full p-2.5' required/>
+                                <label htmlFor="password" className='block mb-2 text-sm font-semibold'>Password</label>
+                                <Input type="password" name='password' id='password' value={formData.password} onChange={handleChange} required/>
+                                
                             </div>
-                            <button className='w-full text-white bg-accent hover:bg-amber-400 font-semibold rounded-lg text-sm px-6 py-3 text-center cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed' disabled={isLoading}>{isLoading ? "Logging in..." : "Login"}</button>
+                            <button className='w-full text-[#161616] bg-[#c9922a] hover:bg-[#b87d1d] font-semibold rounded-lg text-sm px-6 py-3 text-center transition-all duration-150 cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed' disabled={isLoading}>{isLoading ? "Logging in..." : "Login"}</button>
                         </form>
                         {/* Error message */}
                         {error && (

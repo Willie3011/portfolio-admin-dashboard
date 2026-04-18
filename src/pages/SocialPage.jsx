@@ -169,7 +169,7 @@ function AddButton({ onClick }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       onClick={onClick}
-      className={`flex items-center gap-1.5 rounded-md px-4.5 py-2.5 text-sm font-semibold text-[#0f0f0f] transition-colors duration-150 ${hovered ? "bg-[#e0a838]" : "bg-[#c9922a]"
+      className={`flex items-center text-nowrap gap-1.5 rounded-md px-4.5 py-2.5 text-sm font-semibold text-[#0f0f0f] transition-colors duration-150 ${hovered ? "bg-[#e0a838]" : "bg-[#c9922a]"
         }`}
     >
       <IconPlus /> Add social
