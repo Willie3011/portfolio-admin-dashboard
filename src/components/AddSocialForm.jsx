@@ -6,9 +6,10 @@ import { useAddSocialMutation } from "../queries/mutations";
 import Input from "./Input";
 
 
-function AddSocialForm({ onClose }) {
+function AddSocialForm({ onClose, detectPlatform }) {
     const [name, setName] = useState("");
     const [link, setLink] = useState("");
+    const platform = detectPlatform(name);
 
     // Creating skill
     const createSocialMutation = useAddSocialMutation(onClose);
@@ -50,6 +51,17 @@ function AddSocialForm({ onClose }) {
                     value={link}
                     onChange={(e) => setLink(e.target.value)}
                 />
+                <div className="flex items-center gap-2.5 rounded-md border border-[#1e1e1e] bg-[#111] px-3.5 py-2.5">
+                    <div
+                        className="h-2 w-2 shrink-0 rounded-full transition-colors duration-200"
+                        style={{ background: name ? platform.color : "#2a2a2a" }}
+                    />
+                    <span className="text-xs text-[#444]">
+                        {name
+                            ? `Will appear as "${platform.label}"`
+                            : "Enter a platform name to preview"}
+                    </span>
+                </div>
             </div>
 
             {/* Error message */}
@@ -66,12 +78,12 @@ function AddSocialForm({ onClose }) {
                     type="button"
                     onClick={() => onClose(false)}
                     disabled={isLoading}
-                    className="px-6 py-3 border border-primary/80 rounded-lg text-primary hover:bg-primary/10 disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
+                    className="px-4.5 py-2.5 border border-[#2a2a2a] rounded-md text-[#888] hover:bg-[#111] disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
                 >Cancel</button>
                 <button
                     type="submit"
                     disabled={isLoading}
-                    className="text-white inline-flex items-center bg-accent hover:bg-amber-400 font-medium rounded-lg text-sm px-6 py-3 text-center transition duration-300 cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed">{isLoading ? "Saving" : "Save Social"}</button>
+                    className="text-white inline-flex items-center bg-[#c9922a] hover:bg-[#b87d1d] font-medium rounded-md text-sm px-4.5 py-2.5 text-center transition duration-300 cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed">{isLoading ? "Saving..." : "Save Social"}</button>
             </div>
         </form>
     )
